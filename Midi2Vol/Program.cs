@@ -140,7 +140,7 @@ namespace Midi2Vol
             int nano = -1;
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
             {
-                if (MidiIn.DeviceInfo(device).ProductName == "Nano. Slider")//checks that nano slider is present
+                if ((MidiIn.DeviceInfo(device).ProductId == 65535))//checks that nano slider is present
                 {
                     nano = device;
                     return nano;
