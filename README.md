@@ -15,3 +15,10 @@ Nevertheless any change is welcomed and will try to make it as efficient as poss
 
 This uses  AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
            NAudio: https://github.com/naudio/NAudio
+
+
+In order to make it work you'll have to edit in config.h
+
+#define PRODUCT         keyboard
+into
+#define PRODUCT         Nano. Slider 
