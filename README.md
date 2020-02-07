@@ -17,8 +17,12 @@ This uses  AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/A
            NAudio: https://github.com/naudio/NAudio
 
 
-In order to make it work you'll have to edit in config.h
 
+Not needed anymore.
+
+~~In order to make it work you'll have to edit in config.h
 #define PRODUCT         keyboard
 into
 #define PRODUCT         Nano. Slider 
+
+
