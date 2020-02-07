@@ -8,26 +8,46 @@ using Microsoft.Win32;
 
 namespace Midi2Vol
 {
+    
 
     public class TrayApplicationContext : ApplicationContext
     {
-        NotifyIcon _trayIcon = new NotifyIcon();
-        public TrayApplicationContext()
+         NotifyIcon _trayIcon = new NotifyIcon();
+         public TrayApplicationContext()
         {
 
-  
-        ContextMenu _trayMenu = new ContextMenu { };
-        _trayIcon.Icon = new System.Drawing.Icon("icon.ico"); 
+            if (MidiSlider.nanoFind() == -1) {
+                nanoNotPresent();
+            }
+             ContextMenu _trayMenu = new ContextMenu { };
+            _trayIcon.Icon = new System.Drawing.Icon("icon.ico"); 
             _trayIcon.Text = "Nano. Slider";
             _trayMenu.MenuItems.Add("E&xit", exit_Click);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
         }
 
-        private void exit_Click(object sender, EventArgs e)
+
+         public void nanoNotPresent()
         {
-            _trayIcon.Visible = false;
+            const string message =
+                "Nano. Slider not present.\nCheck if its connected or if  \"#define PRODUCT\" is set to:\nNano. Slider  ";
+            const string caption = "Nano. Slider not found";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Error);
+            // If the button was pressed ...
+            if (result == DialogResult.OK)
+            {
+                // close the app.
+                Environment.Exit(1);         // Kaboom!
+            }
+        }
+
+         private void exit_Click(object sender, EventArgs e)
+        {
             Application.Exit();
+            Environment.Exit(1);         // Kaboom!
         }  
     }
     public class startUp {
@@ -55,32 +75,36 @@ namespace Midi2Vol
         {
             CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
 
-            MidiIn midiIn = nanoFind();
-            if (midiIn != null)
+            int nano = nanoFind();
+            if (nano != -1)
+            {
+                MidiIn midiIn = new MidiIn(nano);
+                midiIn.MessageReceived += midiIn_MessageReceived;
+              
+                midiIn.Start();
+                while (true)
                 {
-                    midiIn.MessageReceived += midiIn_MessageReceived;
-                    midiIn.Start();
-                    while (true)
+                    if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3) && potVal < 127) // prevents ghost slides
                     {
-                        if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3) && potVal<127) // prevents ghost slides
-                        {
-                            oldPotVal = potVal;
-                            defaultPlaybackDevice.Volume = potVal / 3 * 2.380; // transform 127 scale into 100 scale
-                        }
-                        Thread.Sleep(100);
+                        oldPotVal = potVal;
+                        defaultPlaybackDevice.Volume = potVal / 3 * 2.380; // transform 127 scale into 100 scale
                     }
-                
+                    Thread.Sleep(100);
+                }
+
             }
+
+           
         }
 
-
-        static MidiIn nanoFind() {
-            MidiIn nano = null;
+        public static int nanoFind() {
+            int nano = -1;
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
             {
-                if (MidiIn.DeviceInfo(device).ProductName == "Nano. Slider")
+                if (MidiIn.DeviceInfo(device).ProductName == "Nano. Slider")//checks that nano slider is present
                 {
-                    nano = new MidiIn(device);
+                    nano = device;
+                    return nano;
                 }
             }
             return nano;
