@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 using Microsoft.Win32;
-using System.Drawing;
 
 namespace Nano_Slider
 {
@@ -32,7 +31,7 @@ namespace Nano_Slider
         }  
     }
     public class startUp {
-        private void SetStartup() //on develope
+        private void SetStartup() //on developement
         {
             String AppName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
             RegistryKey rk = Registry.CurrentUser.OpenSubKey
