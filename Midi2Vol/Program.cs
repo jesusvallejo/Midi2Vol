@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 using Microsoft.Win32;
-using Midi2Vol;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -19,23 +18,23 @@ namespace Midi2Vol
         public TrayApplicationContext()
         {
 
-            if (MidiSlider.nanoFind() == -1) {
-                nanoNotPresent();
+            if (MidiSlider.NanoFind() == -1) {
+                NanoNotPresent();
             }
             ContextMenu _trayMenu = new ContextMenu { };
             _trayIcon.Icon = new System.Drawing.Icon("icon.ico");
             _trayIcon.Text = "Nano. Slider";
-            _trayMenu.MenuItems.Add("E&xit", exit_Click);
+            _trayMenu.MenuItems.Add("E&xit", Exit_Click);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
         }
 
 
-        public void nanoNotPresent()
+        public void NanoNotPresent()// when nano not present , warn and close app
         {
             const string message =
-                "Nano. Slider not present.\nCheck if its connected or if  \"#define PRODUCT\" is set to:\nNano. Slider  ";
-            const string caption = "Nano. Slider not found";
+                "Nano. Slider not found.\nCheck if its connected or if  \"#define PRODUCT\" is set to:\nNano. Slider  ";
+            const string caption = "Nano. Slider";
             var result = MessageBox.Show(message, caption,
                                          MessageBoxButtons.OK,
                                          MessageBoxIcon.Error);
@@ -47,7 +46,7 @@ namespace Midi2Vol
             }
         }
 
-        private void exit_Click(object sender, EventArgs e)
+        private void Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
             Environment.Exit(1);         // Kaboom!
@@ -107,16 +106,16 @@ namespace Midi2Vol
     {
          static int potVal = -1;// potentiometer resistence value
          static int oldPotVal = -1; // value to check with the old value
-        static public  void midiSlider()
+        static public  void Slider()
         {
             CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
 
-            int nano = nanoFind();
-            if (nano != -1)
+            int nano = NanoFind();
+            if (nano != -1)//check its present
             {
                 MidiIn midiIn = new MidiIn(nano);
-                midiIn.MessageReceived += midiIn_MessageReceived;
-              
+                midiIn.MessageReceived += MidiIn_MessageReceived;
+
                 midiIn.Start();
                 while (true)
                 {
@@ -129,11 +128,15 @@ namespace Midi2Vol
                 }
 
             }
+            else {
+                TrayApplicationContext closeEverithing = new TrayApplicationContext();//not present so closing
+                closeEverithing.NanoNotPresent();
+            }
 
            
         }
 
-        public static int nanoFind() {
+        public static int NanoFind() {
             int nano = -1;
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
             {
@@ -146,7 +149,7 @@ namespace Midi2Vol
             return nano;
         }
 
-        static void midiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
+        static void MidiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
         {
             MidiEvent me = e.MidiEvent;
             ControlChangeEvent cce = me as ControlChangeEvent;
@@ -165,12 +168,17 @@ namespace Midi2Vol
         [System.STAThread]
         static void Main()
         {
-            if (startUp.RunningInstance() != null)
+            if (startUp.RunningInstance() != null)//check is not already runing before start
             {
-                MessageBox.Show("Midi2Vol is already runing");
+                const string message =
+                "Midi2Vol is already runing ";
+                const string caption = "Nano. Slider";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.OK,
+                                             MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
-            Task.Run(() => MidiSlider.midiSlider());
+            Task.Run(() => MidiSlider.Slider());
             Application.Run(new TrayApplicationContext());
 
         }
