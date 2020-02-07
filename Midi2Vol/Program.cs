@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System;
 using Microsoft.Win32;
 
-namespace Nano_Slider
+namespace Midi2Vol
 {
 
     public class TrayApplicationContext : ApplicationContext

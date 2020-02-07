@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Nano_Slider.Program</StartupObject>
+    <StartupObject>Midi2Vol.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>2DAF9D0956C9B2AB7605403CD1CD31CC05CC93EA</ManifestCertificateThumbprint>
