@@ -10,3 +10,8 @@ It is written only for Windows and wont work on any other plataform as it has to
 I'll provice a binary installer but i recommend you to compile it by yourself. 
 It is provided as is , and it comes with no guarantee. 
 Nevertheless any change is welcomed and will try to make it as efficient as possible.
+
+
+
+This uses  AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
+           NAudio: https://github.com/naudio/NAudio
