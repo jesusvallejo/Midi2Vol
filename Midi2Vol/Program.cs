@@ -5,22 +5,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 using Microsoft.Win32;
+using Midi2Vol;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace Midi2Vol
 {
-    
+
 
     public class TrayApplicationContext : ApplicationContext
     {
-         NotifyIcon _trayIcon = new NotifyIcon();
-         public TrayApplicationContext()
+        NotifyIcon _trayIcon = new NotifyIcon();
+        public TrayApplicationContext()
         {
 
             if (MidiSlider.nanoFind() == -1) {
                 nanoNotPresent();
             }
-             ContextMenu _trayMenu = new ContextMenu { };
-            _trayIcon.Icon = new System.Drawing.Icon("icon.ico"); 
+            ContextMenu _trayMenu = new ContextMenu { };
+            _trayIcon.Icon = new System.Drawing.Icon("icon.ico");
             _trayIcon.Text = "Nano. Slider";
             _trayMenu.MenuItems.Add("E&xit", exit_Click);
             _trayIcon.ContextMenu = _trayMenu;
@@ -28,7 +31,7 @@ namespace Midi2Vol
         }
 
 
-         public void nanoNotPresent()
+        public void nanoNotPresent()
         {
             const string message =
                 "Nano. Slider not present.\nCheck if its connected or if  \"#define PRODUCT\" is set to:\nNano. Slider  ";
@@ -44,28 +47,61 @@ namespace Midi2Vol
             }
         }
 
-         private void exit_Click(object sender, EventArgs e)
+        private void exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
             Environment.Exit(1);         // Kaboom!
-        }  
+        }
     }
-    public class startUp {
+    public class startUp
+    {
         private void SetStartup() //on developement
         {
             String AppName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
             RegistryKey rk = Registry.CurrentUser.OpenSubKey
                 ("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
 
-           // if (chkStartUp.Checked)
-               // rk.SetValue(AppName, Application.ExecutablePath);
-           // else
-              //  rk.DeleteValue(AppName, false);
+            // if (chkStartUp.Checked)
+            // rk.SetValue(AppName, Application.ExecutablePath);
+            // else
+            //  rk.DeleteValue(AppName, false);
 
         }
 
 
+
+        public static Process RunningInstance()
+        {
+            Process current = Process.GetCurrentProcess();
+            Process[] processes = Process.GetProcessesByName(current.ProcessName);
+
+            //Loop through the running processes in with the same name 
+            foreach (Process process in processes)
+            {
+                //Ignore the current process 
+                if (process.Id != current.Id)
+                {
+                    //Make sure that the process is running from the exe file. 
+                    if (Assembly.GetExecutingAssembly().Location.
+                         Replace("/", "\\") == current.MainModule.FileName)
+
+                    {
+                        //Return the other process instance.  
+                        return process;
+
+                    }
+                }
+            }
+            //No other instance was found, return null.  
+            return null;
+        }
+
+
+        
     }
+        
+
+
 
      public class MidiSlider
     {
@@ -129,6 +165,11 @@ namespace Midi2Vol
         [System.STAThread]
         static void Main()
         {
+            if (startUp.RunningInstance() != null)
+            {
+                MessageBox.Show("Midi2Vol is already runing");
+                Environment.Exit(1);
+            }
             Task.Run(() => MidiSlider.midiSlider());
             Application.Run(new TrayApplicationContext());
 
