@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="562c3883-8c1b-40e4-82d6-4fcb9f2b845a" Name="Midi2Vol installer" Language="1033" Version="0.0.1.2" Manufacturer="JVCSoft" UpgradeCode="f187a295-f8c9-4596-acd0-3355838d8ee3">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Feature Id="ProductFeature" Title="Midi2Vol" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Midi2Vol" />
+      </Directory>
+    </Directory>
+  </Fragment>
+
+
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="ProductComponent">
+        <File Source="$(var.Midi2Vol.TargetPath)" />
+      </Component>
+      <Component Id="NAudio.dll" Guid="5adedbad-05e8-4fca-88ac-3894dfb22ebe" >
+        <File Id="NAudio.dll" Source="C:\Users\jesus\source\repos\Midi2Vol\Midi2Vol\bin\Release\NAudio.dll" KeyPath="yes"/>
+      </Component>
+      <Component Id="AudioSwitcher.AudioApi.CoreAudio.dll" Guid="ff538cd0-9d8f-4796-8950-ade8b0217b0b" >
+        <File Id="AudioSwitcher.AudioApi.CoreAudio.dll" Source="C:\Users\jesus\source\repos\Midi2Vol\Midi2Vol\bin\Release\AudioSwitcher.AudioApi.CoreAudio.dll" KeyPath="yes"/>
+      </Component>
+      <Component Id="AudioSwitcher.AudioApi.dll" Guid="62d1c202-fc8c-4d3b-9b11-4f99356b84e2" >
+        <File Id="AudioSwitcher.AudioApi.dll" Source="C:\Users\jesus\source\repos\Midi2Vol\Midi2Vol\bin\Release\AudioSwitcher.AudioApi.dll" KeyPath="yes"/>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+</Wix>

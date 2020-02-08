@@ -4,9 +4,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>3.10</ProductVersion>
-    <ProjectGuid>20693152-366a-4266-9473-9f826e1f07f8</ProjectGuid>
+    <ProjectGuid>f08703da-ec1b-4fd2-9d0c-13b2f6ad4e95</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>installer</OutputName>
+    <OutputName>Midi2Volinstaller</OutputName>
     <OutputType>Package</OutputType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
