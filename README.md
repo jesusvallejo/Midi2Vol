@@ -24,7 +24,7 @@ Not needed anymore.
 
 TODO
 - [ ] Msi installer
-- [x] Separate classes into multiple files t improve readability
+- [x] Separate classes into multiple files to improve readability
 - [ ] Add auto launch on boot
 - [ ] Add menu to Apply/Remove auto launch on boot
 - [ ] Test stability
