@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- The name of the product -->
+<?define Name = "Nano. Slider Midi2Vol" ?>
+<!-- The Description of the product -->
+<?define Description = "Nano. Slider Midi2Vol" ?>
+<!-- The manufacturer, for setup package publisher and folder info -->
+<?define Manufacturer = "JVCSoft" ?>
+<!-- The version number of this setup package-->
+<?define Version = "0.0.1.2" ?>
+<!-- Icon-->
+<?define Icon = "resources\NanoSlider.ico" ?>
+<!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
+<?define UpgradeCode = "{f187a295-f8c9-4596-acd0-3355838d8ee3}" ?>
+
+
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="562c3883-8c1b-40e4-82d6-4fcb9f2b845a" Name="Nano. Slider Midi2Vol" Language="1033" Version="0.0.1.2" Manufacturer="JVCSoft" UpgradeCode="f187a295-f8c9-4596-acd0-3355838d8ee3">
+  <Product Id="562c3883-8c1b-40e4-82d6-4fcb9f2b845a" Name="$(var.Name)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <Icon Id="icon.ico" SourceFile="resources\NanoSlider.ico"/>
+    <Icon Id="icon.ico" SourceFile="$(var.Icon)"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate />
@@ -20,7 +35,18 @@
     </Directory>
   </Fragment>
 
-
+  <Fragment>
+  <DirectoryRef Id="ApplicationProgramsFolder">
+    <!--Create application shortcut in Program Menu-->
+    <Component Id="ApplicationShortcut" Guid="3a38df9c-7323-4273-93f1-3f5f089bf06c">
+      <Shortcut Id="ApplicationStartMenuShortcut" Name="$(var.Name)" Description="$(var.Description)" Icon="icon.ico" Target="[#Sample_Application.exe]" WorkingDirectory="INSTALLFOLDER" />
+      <!--Remove application shortcut from Program Menu on uninstall-->
+      <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+      <!--Create application registry entry-->
+      <RegistryValue Root="HKCU" Key="Software\Microsoft\$(var.Manufacturer)\$(var.Name)" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+    </Component>
+  </DirectoryRef>
+  </Fragment>
 
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
