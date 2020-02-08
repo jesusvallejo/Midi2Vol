@@ -24,6 +24,7 @@ Not needed anymore.
 
 TODO
 - [ ] Msi installer
+- [ ] set proper public/private flags to code
 - [x] Separate classes into multiple files to improve readability
 - [ ] Add auto launch on boot
 - [ ] Add menu to Apply/Remove auto launch on boot
