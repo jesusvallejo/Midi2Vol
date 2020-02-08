@@ -22,7 +22,7 @@ namespace Midi2Vol
                 NanoNotPresent();
             }
             ContextMenu _trayMenu = new ContextMenu { };
-            _trayIcon.Icon = new System.Drawing.Icon("icon.ico");
+            _trayIcon.Icon = new System.Drawing.Icon("NanoSlider.ico");
             _trayIcon.Text = "Nano. Slider";
             _trayMenu.MenuItems.Add("E&xit", Exit_Click);
             _trayIcon.ContextMenu = _trayMenu;
