@@ -1,8 +1,8 @@
 # Midi2Vol
 Windows Volume Control for Nano. Slider
 
-![alt text]https://github.com/jesusvallejo/Midi2Vol/blob/master/NanoSlider.ico)
-Windows midi to volume converter for Nano. slider
+![alt text]https://github.com/jesusvallejo/Midi2Vol/blob/master/ReadResources/NanoSlider.png?raw=true)
+
 
 This is mainly developed for Nano. Slider, but it can be fairly easily used with any Midi based potentiometer. 
 It is written only for Windows and wont work on any other plataform as it has to be written in OS compatible language (C# in this case with .net framework).
