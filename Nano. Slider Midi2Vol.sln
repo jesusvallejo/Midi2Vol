@@ -5,16 +5,30 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Midi2Vol", "Midi2Vol\Midi2Vol.csproj", "{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "installer", "installer\installer.wixproj", "{20693152-366A-4266-9473-9F826E1F07F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Debug|x86.Build.0 = Debug|Any CPU
 		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}.Release|x86.Build.0 = Release|Any CPU
+		{20693152-366A-4266-9473-9F826E1F07F8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{20693152-366A-4266-9473-9F826E1F07F8}.Debug|x86.ActiveCfg = Debug|x86
+		{20693152-366A-4266-9473-9F826E1F07F8}.Debug|x86.Build.0 = Debug|x86
+		{20693152-366A-4266-9473-9F826E1F07F8}.Release|Any CPU.ActiveCfg = Release|x86
+		{20693152-366A-4266-9473-9F826E1F07F8}.Release|x86.ActiveCfg = Release|x86
+		{20693152-366A-4266-9473-9F826E1F07F8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
