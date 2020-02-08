@@ -23,7 +23,7 @@ Not needed anymore.
 ~~In order to make it work you'll have to edit in config.#define PRODUCT keyboard into #define PRODUCT Nano. Slider~~
 
 TODO
-- [ ] Msi installer
+- [x] Msi installer
 - [ ] set proper public/private flags to code
 - [x] Separate classes into multiple files to improve readability
 - [ ] Add auto launch on boot
