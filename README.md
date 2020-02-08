@@ -1,7 +1,7 @@
 # Midi2Vol
 Windows Volume Control for Nano. Slider
 
-![alt text]https://github.com/jesusvallejo/Midi2Vol/blob/master/ReadResources/NanoSlider.png?raw=true)
+![alt text]https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/ReadResources/NanoSlider.png)
 
 
 This is mainly developed for Nano. Slider, but it can be fairly easily used with any Midi based potentiometer. 
