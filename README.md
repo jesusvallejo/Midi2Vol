@@ -1,8 +1,9 @@
 # Midi2Vol
+
+<img src="https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/ReadResources/NanoSlider.png" width="60">
+
 Windows Volume Control for Nano. Slider
 
-
-Windows midi to volume converter for Nano. slider
 
 This is mainly developed for Nano. Slider, but it can be fairly easily used with any Midi based potentiometer. 
 It is written only for Windows and wont work on any other plataform as it has to be written in OS compatible language (C# in this case with .net framework).
@@ -13,12 +14,11 @@ Nevertheless any change is welcomed and will try to make it as efficient as poss
 
 
 
-This uses  AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
-           NAudio: https://github.com/naudio/NAudio
+This uses the following libraries:
+           - AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
+           - NAudio: https://github.com/naudio/NAudio
 
+Not needed anymore.
 
-In order to make it work you'll have to edit in config.h
+~~In order to make it work you'll have to edit in config.#define PRODUCT keyboard into #define PRODUCT Nano. Slider~~
 
-#define PRODUCT         keyboard
-into
-#define PRODUCT         Nano. Slider 
