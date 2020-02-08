@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada a un ensamblado.
-[assembly: AssemblyTitle("ConsoleApp1")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Nano. Slider Midi2Vol")]
+[assembly: AssemblyDescription("Nano. Slider Midi2Vol")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ConsoleApp1")]
+[assembly: AssemblyCompany("JVCSoft")]
+[assembly: AssemblyProduct("Nano. Slider Midi2Vol")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
