@@ -22,7 +22,7 @@ namespace Midi2Vol
             if (!nanoSliderTray.ProgramAlreadyRuning() && !nanoSliderTray.NanoNotPresentMB())
             {
                 MidiSlider nanoSlider = new MidiSlider();
-                Task.Run(() => nanoSlider.Slider());
+                //Task.Run(() => nanoSlider.Slider());
                 Application.Run(nanoSliderTray);
             }           
         }
