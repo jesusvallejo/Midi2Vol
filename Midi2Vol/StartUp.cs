@@ -28,7 +28,6 @@ namespace Midi2Vol
             shortcut.TargetPath = Application.ExecutablePath;
             shortcut.WorkingDirectory = Application.StartupPath;
             shortcut.Description = "Launch My Application";
-            shortcut.IconLocation = Properties.Resources.NanoSlider.ToString();
             shortcut.Save();
         }
 
