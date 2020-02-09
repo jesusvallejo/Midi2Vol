@@ -7,26 +7,24 @@ namespace Midi2Vol
     public class TrayApplicationContext : ApplicationContext
     {
         NotifyIcon _trayIcon = new NotifyIcon();
+        Program exit = new Program();
+        MidiSlider slider = new MidiSlider();
         public TrayApplicationContext()
         {
-
-            if (MidiSlider.NanoFind() == -1)
-            {
-                NanoNotPresent();
-            }
             ContextMenu _trayMenu = new ContextMenu { };
             _trayIcon.Icon = Properties.Resources.NanoSlider;
             _trayIcon.Text = "Nano. Slider";
-            _trayMenu.MenuItems.Add("E&xit", Exit_Click);
+            _trayMenu.MenuItems.Add("E&xit", ExitClick);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
         }
 
 
-        public void NanoNotPresent()// when nano not present , warn and close app
+        public bool NanoNotPresentMB()// when nano not present , warn and close app
         {
-            const string message =
-                "Nano. Slider not found.\nCheck if its connected or if  \"#define PRODUCT\" is set to:\nNano. Slider  ";
+            if (!slider.GetNano()) { 
+            const string message ="Nano. Slider not found.\nCheck if its connected or if  +" +
+                                                                     "\"#define PRODUCT\" is set to:\nNano. Slider  ";
             const string caption = "Nano. Slider";
             var result = MessageBox.Show(message, caption,
                                          MessageBoxButtons.OK,
@@ -35,14 +33,26 @@ namespace Midi2Vol
             if (result == DialogResult.OK)
             {
                 // close the app.
-                Environment.Exit(1);         // Kaboom!
+                exit.ExitProgram();        // Kaboom!
             }
+            }
+            return false;
         }
 
-        private void Exit_Click(object sender, EventArgs e)
+        public bool ProgramAlreadyRuning()// when nano not present , warn and close app
         {
-            Application.Exit();
-            Environment.Exit(1);         // Kaboom!
+            if (StartUp.RunningInstance() != null)//check is not already runing before start
+            {
+                const string message ="Midi2Vol is already runing ";
+                const string caption = "Nano. Slider";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK,MessageBoxIcon.Error);    
+                exit.ExitProgram();
+            }
+            return false;
+        }
+        private void ExitClick(object sender, EventArgs e)
+        {
+            exit.ExitProgram();
         }
     }
 }

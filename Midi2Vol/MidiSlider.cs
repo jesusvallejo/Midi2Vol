@@ -1,45 +1,66 @@
 ﻿using AudioSwitcher.AudioApi.CoreAudio;
 using NAudio.Midi;
+
+using System.Diagnostics;
 using System.Threading;
+using System;
 
 namespace Midi2Vol
 {
     public class MidiSlider
     {
-        static int potVal = -1;// potentiometer resistence value
-        static int oldPotVal = -1; // value to check with the old value
-        static public void Slider()
+         
+         private int potVal = -1;// potentiometer resistence value
+         private int oldPotVal = -1; // value to check with the old value
+
+        
+        public void Slider()
         {
-            CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
-
-            int nano = NanoFind();
-            if (nano != -1)//check its present
+            try
             {
-                MidiIn midiIn = new MidiIn(nano);
-                midiIn.MessageReceived += MidiIn_MessageReceived;
+                CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;  /// sometimes null reference exception
 
-                midiIn.Start();
-                while (true)
+            
+            int nano = GetNanoID();
+                if (GetNano())//check its present
                 {
-                    if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3) && potVal < 127) // prevents ghost slides
+                    Debug.WriteLine("MidiSlider setting up");
+                    MidiIn midiIn = new MidiIn(nano);
+                    midiIn.MessageReceived += MidiIn_MessageReceived;
+                    midiIn.Start();
+                    while (true)
                     {
-                        oldPotVal = potVal;
-                        defaultPlaybackDevice.Volume = potVal / 3 * 2.380; // transform 127 scale into 100 scale
+                        Debug.WriteLine("checking change");
+                        if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
+                        {
+                            Debug.WriteLine("volume update");
+                            oldPotVal = potVal;
+                            defaultPlaybackDevice.Volume = Math.Ceiling(potVal / 3 * 2.39); // transform 127 scale into 100 scale
+                        }
+                        Thread.Sleep(100);
                     }
-                    Thread.Sleep(100);
-                }
 
+                }
+                else
+                {
+                    TrayApplicationContext closeEverithing = new TrayApplicationContext();//not present so closing
+
+                    closeEverithing.NanoNotPresentMB();
+                }
             }
-            else
+            catch (NullReferenceException e)
             {
-                TrayApplicationContext closeEverithing = new TrayApplicationContext();//not present so closing
-                closeEverithing.NanoNotPresent();
+
+                Debug.WriteLine(e.StackTrace);
+                CoreAudioDevice defaultCaptureDevice = new CoreAudioController().DefaultCaptureDevice;
+                defaultCaptureDevice.Volume = 100; ///seems to solve the bug , 
+
             }
 
 
         }
 
-        public static int NanoFind()
+        private int NanoFind()
         {
             int nano = -1;
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
@@ -52,8 +73,24 @@ namespace Midi2Vol
             }
             return nano;
         }
+        public int GetNanoID() {
+            return NanoFind();
+        }
+        public bool GetNano()
+        {
+            if (NanoFind() == -1)
+            {
+                Debug.WriteLine("MidiSlider not Found");
+                return false;
+            }
+            else
+            {
+                Debug.WriteLine("MidiSlider found");
+                return true;
+            }
+        }
 
-        static void MidiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
+        private void MidiIn_MessageReceived(object sender, MidiInMessageEventArgs e)
         {
             MidiEvent me = e.MidiEvent;
             ControlChangeEvent cce = me as ControlChangeEvent;

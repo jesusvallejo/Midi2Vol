@@ -2,38 +2,31 @@
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
-using Microsoft.Win32;
-using System.Diagnostics;
-using System.Reflection;
+
 
 namespace Midi2Vol
 {
-    class Program {
+    public class Program {
+
+        public void ExitProgram()
+        {
+            Application.Exit();           // closed everything
+            Environment.Exit(1);         // Kaboom!
+        }
+
 
         [System.STAThread]
         static void Main()
         {
-            if (StartUp.RunningInstance() != null)//check is not already runing before start
+            TrayApplicationContext nanoSliderTray = new TrayApplicationContext();
+            if (!nanoSliderTray.ProgramAlreadyRuning() && !nanoSliderTray.NanoNotPresentMB())
             {
-                const string message =
-                "Midi2Vol is already runing ";
-                const string caption = "Nano. Slider";
-                var result = MessageBox.Show(message, caption,
-                                             MessageBoxButtons.OK,
-                                             MessageBoxIcon.Error);
-                Environment.Exit(1);
-            }
-            Task.Run(() => MidiSlider.Slider());
-            Application.Run(new TrayApplicationContext());
-
+                MidiSlider nanoSlider = new MidiSlider();
+                Task.Run(() => nanoSlider.Slider());
+                Application.Run(nanoSliderTray);
+            }           
         }
-
-
-
-
     }
-
-
 }
 
 
