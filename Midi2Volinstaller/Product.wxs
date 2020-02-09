@@ -22,7 +22,7 @@
     
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    <MediaTemplate />
+    <Media Id="1" Cabinet="Cab1.cab" EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="Midi2Vol" Level="1">
       <ComponentGroupRef Id="ProductComponents" />
@@ -30,6 +30,7 @@
   </Product>
 
   <Fragment>
+    
     <Directory Id="TARGETDIR" Name="SourceDir">
   <Directory Id="ProgramFilesFolder">
     <Directory Id="INSTALLFOLDER" Name="$(var.Name)" />
