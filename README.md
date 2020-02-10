@@ -15,7 +15,8 @@ The app lives in the tray in order to be less intrusive, for the moment the only
 There are three versions,all three are the same but the icon, which can match your Nano. Slider's appearance, in the future there will be an option to configure it instead of multiple installers.
 
 I'll provice a binary installer but i recommend you to compile it by yourself. 
-It is provided as is , and it comes with no guarantee.(see LICENCE.md)
+It is provided as is, and it comes with no guarantee.(see LICENCE.md)
+
 Nevertheless any change, update or upgrade is welcomed.
 
 This project uses the following libraries:
