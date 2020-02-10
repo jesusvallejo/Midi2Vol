@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NanoSlider.ico" />
+    <None Include="Resources\NanoSlider.ico" />
     <None Include="Resources\NanoWavez.ico" />
     <None Include="Resources\NanoBento.ico" />
   </ItemGroup>
