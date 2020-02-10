@@ -15,8 +15,9 @@ It is provided as is , and it comes with no guarantee.
 Nevertheless any change is welcomed and will try to make it as efficient as possible.
 
 This project uses the following libraries:
-           - AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
-           - NAudio: https://github.com/naudio/NAudio
+
+- AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
+- NAudio: https://github.com/naudio/NAudio
 
 TODO
 - [x] Msi installer
