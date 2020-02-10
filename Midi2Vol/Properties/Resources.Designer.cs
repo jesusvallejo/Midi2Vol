@@ -63,9 +63,29 @@ namespace Midi2Vol.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
+        public static System.Drawing.Icon NanoBento {
+            get {
+                object obj = ResourceManager.GetObject("NanoBento", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
         public static System.Drawing.Icon NanoSlider {
             get {
                 object obj = ResourceManager.GetObject("NanoSlider", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        public static System.Drawing.Icon NanoWavez {
+            get {
+                object obj = ResourceManager.GetObject("NanoWavez", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
