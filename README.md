@@ -14,15 +14,9 @@ I'll provice a binary installer but i recommend you to compile it by yourself.
 It is provided as is , and it comes with no guarantee. 
 Nevertheless any change is welcomed and will try to make it as efficient as possible.
 
-
-
-This uses the following libraries:
+This project uses the following libraries:
            - AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
            - NAudio: https://github.com/naudio/NAudio
-
-Not needed anymore.
-
-~~In order to make it work you'll have to edit in config.#define PRODUCT keyboard into #define PRODUCT Nano. Slider~~
 
 TODO
 - [x] Msi installer
