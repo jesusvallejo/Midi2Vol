@@ -1,6 +1,8 @@
 # Midi2Vol
 
-<img src="https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/ReadResources/NanoSlider.png" width="60">
+<img src="https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/ReadResources/NanoSlider.png" width="60">  <img src="https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/ReadResources/NanoBento.png" width="60"> <img src="https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/ReadResources/NanoWavez.png" width="60">
+
+
 
 Windows Volume Control for Nano. Slider
 
@@ -24,7 +26,8 @@ Not needed anymore.
 
 TODO
 - [x] Msi installer
-- [ ] set proper public/private flags to code
+- [x] Edition Icon
+- [ ] Set proper public/private flags to code
 - [x] Separate classes into multiple files to improve readability
 - [x] Add auto launch on boot
 - [x] Add menu to Apply/Remove auto launch on boot
