@@ -15,7 +15,7 @@ namespace Midi2Vol
         {
             ContextMenu _trayMenu = new ContextMenu { };
 
-            _trayIcon.Icon = Properties.Resources.NanoWavez;
+            _trayIcon.Icon = Properties.Resources.NanoSlider;
             _trayIcon.BalloonTipText = "Volume controled by Nano. Slider";
             _trayIcon.BalloonTipTitle = "Nano. Slider Win2Vol";
             _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
