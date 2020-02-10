@@ -26,7 +26,8 @@ Not needed anymore.
 
 TODO
 - [x] Msi installer
-- [ ] set proper public/private flags to code
+- [x] Edition Icon
+- [ ] Set proper public/private flags to code
 - [x] Separate classes into multiple files to improve readability
 - [x] Add auto launch on boot
 - [x] Add menu to Apply/Remove auto launch on boot
