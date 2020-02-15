@@ -20,7 +20,7 @@ Durante la instalacion la aplicacion sera añadida para su ejecución durante el
 Existen tres versiones de la aplicación, las tres vesiones son exactamente iguales a excepción del icono mostrado, de modo que la aplicación se puede parecer a tu Nano. Slider.
 
 Se incluye un binario para su instalación, sin embargo recomiendo que lo compiles tu mismo.
-Se provee tal cual esta , y carece de cualquier garantia.(ver [Licencia](./LICENCE))
+Se provee tal cual esta , y carece de cualquier garantia.(ver [Licencia](https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/LICENSE))
 
 Siempre se agradece cualquier mejora o propuesta.
 
