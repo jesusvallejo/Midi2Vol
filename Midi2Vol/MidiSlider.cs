@@ -1,4 +1,5 @@
 ﻿using AudioSwitcher.AudioApi.CoreAudio;
+using Microsoft.Win32;
 using NAudio.Midi;
 using System;
 using System.Diagnostics;
@@ -20,6 +21,7 @@ namespace Midi2Vol
             nanoSliderTray = new TrayApplicationContext();
             if (!nanoSliderTray.ProgramAlreadyRuning())
             {
+                
                 Task.Run(() => Slider());
                 Application.Run(nanoSliderTray);//run everything before this line or wont be runned
             }
@@ -53,6 +55,21 @@ namespace Midi2Vol
             }
         }
 
+
+
+
+        private void OnPowerChange(object s, PowerModeChangedEventArgs e)
+        {
+            switch (e.Mode)
+            {
+                case PowerModes.Resume:
+                    nanoID = -1;
+                    NanoFind();
+                    break;
+               
+            }
+        }
+
         private int NanoFind()
         {
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
@@ -65,6 +82,7 @@ namespace Midi2Vol
                         nanoID = device;
                         midiIn = new MidiIn(nanoID);
                         midiIn.MessageReceived += MidiIn_MessageReceived;
+                        SystemEvents.PowerModeChanged += OnPowerChange;
                         midiIn.Start();
                         nanoSliderTray.Ready();
                     }

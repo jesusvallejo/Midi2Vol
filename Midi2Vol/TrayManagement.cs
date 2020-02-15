@@ -62,7 +62,7 @@ namespace Midi2Vol
             return true;
         }
 
-         public bool ProgramAlreadyRuning()// when nano not present , warn and close app
+         public bool ProgramAlreadyRuning()// 
         {
             if (StartUp.RunningInstance() != null)//check is not already runing before start
             {

@@ -1,4 +1,5 @@
 ﻿using IWshRuntimeLibrary;
+using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -69,6 +70,13 @@ namespace Midi2Vol
             //No other instance was found, return null.  
             return null;
         }
+
+
+
+
+       
+
+        
 
 
 
