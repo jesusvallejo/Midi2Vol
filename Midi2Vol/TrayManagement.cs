@@ -13,7 +13,7 @@ namespace Midi2Vol
          public TrayApplicationContext()
         {
             ContextMenu _trayMenu = new ContextMenu { };
-            _trayIcon.Icon = Properties.Resources.NanoBento;
+            _trayIcon.Icon = Properties.Resources.NanoWavez;
             _trayIcon.Text = "Nano. Slider";
             _trayMenu.MenuItems.Add("Add/Remove Run on StartUp", ConfigClick);
             _trayMenu.MenuItems.Add("E&xit", ExitClick);
