@@ -1,93 +1,80 @@
 ﻿using AudioSwitcher.AudioApi.CoreAudio;
 using NAudio.Midi;
-
+using System;
 using System.Diagnostics;
 using System.Threading;
-using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Midi2Vol
 {
     public class MidiSlider
     {
-         
-         private int potVal = -1;// potentiometer resistence value
-         private int oldPotVal = -1; // value to check with the old value
+        private MidiIn midiIn;
+        private int nanoID = -1;
+        private int potVal = -1;// potentiometer resistence value
+        private int oldPotVal = -1; // value to check with the old value
+        bool showed = false;
+        TrayApplicationContext nanoSliderTray ;
+        public MidiSlider() {
+            nanoSliderTray = new TrayApplicationContext();
+            if (!nanoSliderTray.ProgramAlreadyRuning())
+            {
+                Task.Run(() => Slider());
+                Application.Run(nanoSliderTray);//run everything before this line or wont be runned
+            }
+        }
 
-        
-        public void Slider()
+        private void Slider()
         {
+            
             try
             {
-                CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;  /// sometimes null reference exception
-
-            
-            int nano = GetNanoID();
-                if (GetNano())//check its present
+                CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;  /// sometimes null reference exception                   
+                while (true)
                 {
-                    Debug.WriteLine("MidiSlider setting up");
-                    MidiIn midiIn = new MidiIn(nano);
-                    midiIn.MessageReceived += MidiIn_MessageReceived;
-                    midiIn.Start();
-                    while (true)
+                    Debug.WriteLine("checking change");
+                    if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
                     {
-                        Debug.WriteLine("checking change");
-                        if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
-                        {
-                            Debug.WriteLine("volume update");
-                            oldPotVal = potVal;
-                            defaultPlaybackDevice.Volume = Math.Ceiling(potVal / 3 * 2.39); // transform 127 scale into 100 scale
-                        }
-                        Thread.Sleep(100);
+                        Debug.WriteLine("volume update");
+                        oldPotVal = potVal;
+                        defaultPlaybackDevice.Volume = Math.Ceiling(potVal / 3 * 2.39); // transform 127 scale into 100 scale
                     }
-
-                }
-                else
-                {
-                    TrayApplicationContext closeEverithing = new TrayApplicationContext();//not present so closing
-
-                    closeEverithing.NanoNotPresentMB();
-                }
+                    NanoFind();
+                    Thread.Sleep(100);
+                }        
             }
             catch (NullReferenceException e)
             {
-
                 Debug.WriteLine(e.StackTrace);
                 CoreAudioDevice defaultCaptureDevice = new CoreAudioController().DefaultCaptureDevice;
-                defaultCaptureDevice.Volume = 100; ///seems to solve the bug , 
+                defaultCaptureDevice.Volume = 100; ///seems to solve the bug, 
 
             }
-
-
         }
 
         private int NanoFind()
         {
-            int nano = -1;
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
             {
                 if ((MidiIn.DeviceInfo(device).ProductId == 65535))//checks that nano slider is present
                 {
-                    nano = device;
-                    return nano;
+                    if (nanoID != device)
+                    {
+                        
+                        nanoID = device;
+                        midiIn = new MidiIn(nanoID);
+                        midiIn.MessageReceived += MidiIn_MessageReceived;
+                        midiIn.Start();
+                        nanoSliderTray.Ready();
+                    }
+                    showed = false;
+                    return nanoID;
                 }
             }
-            return nano;
-        }
-        public int GetNanoID() {
-            return NanoFind();
-        }
-        public bool GetNano()
-        {
-            if (NanoFind() == -1)
-            {
-                Debug.WriteLine("MidiSlider not Found");
-                return false;
-            }
-            else
-            {
-                Debug.WriteLine("MidiSlider found");
-                return true;
-            }
+            nanoID = -1;
+            showed = nanoSliderTray.NanoNotPresentMB(showed);
+            return nanoID;
         }
 
         private void MidiIn_MessageReceived(object sender, MidiInMessageEventArgs e)

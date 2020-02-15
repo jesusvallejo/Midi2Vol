@@ -1,90 +1,101 @@
-﻿using System.Windows.Forms;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Midi2Vol
 {
-    public class TrayApplicationContext : ApplicationContext
+     public class TrayApplicationContext : ApplicationContext
     {
-        NotifyIcon _trayIcon = new NotifyIcon();
-        Program exit = new Program();
-        MidiSlider slider = new MidiSlider();
-        public TrayApplicationContext()
+        static NotifyIcon _trayIcon = new NotifyIcon();
+        
+
+         public TrayApplicationContext()
         {
             ContextMenu _trayMenu = new ContextMenu { };
-
             _trayIcon.Icon = Properties.Resources.NanoSlider;
-            _trayIcon.BalloonTipText = "Volume controled by Nano. Slider";
-            _trayIcon.BalloonTipTitle = "Nano. Slider Win2Vol";
-            _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
             _trayIcon.Text = "Nano. Slider";
             _trayMenu.MenuItems.Add("Add/Remove Run on StartUp", ConfigClick);
             _trayMenu.MenuItems.Add("E&xit", ExitClick);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
-            _trayIcon.ShowBalloonTip(500);
         }
 
 
-        public bool NanoNotPresentMB()// when nano not present , warn and close app
+        public void Ready() {
+              _trayIcon.BalloonTipText = "Nano. Slider is now ready.";
+              _trayIcon.BalloonTipTitle = "Nano. Slider Win2Vol";
+              _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
+              _trayIcon.ShowBalloonTip(500);
+            
+        }
+
+         private void ExitProgram()
         {
-            if (!slider.GetNano()) {
-                const string message = "Nano. Slider not found.\nCheck if its connected or if  +" +
-                                                                         "\"#define PRODUCT\" is set to:\nNano. Slider  ";
-                const string caption = "Nano. Slider";
-                var result = MessageBox.Show(message, caption,
-                                             MessageBoxButtons.OK,
-                                             MessageBoxIcon.Error);
+            Application.Exit();           // closed everything
+            Environment.Exit(1);         // Kaboom!
+        }
+
+         public bool NanoNotPresentMB(bool showed)// when nano not present , warn and close app
+        {
+            if (showed == false) {
+            showed = true;
+            _trayIcon.Visible = false;//to avoid showing two icons in the traybar  
+            const string message = "Nano. Slider not found, please connect it. Do you want to close Nano. Slider Win2Vol? ";
+            const string caption = "Nano. Slider";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.OKCancel,
+                                         MessageBoxIcon.Error);
                 // If the button was pressed ...
                 if (result == DialogResult.OK)
                 {
                     // close the app.
-                    exit.ExitProgram();        // Kaboom!
+                    ExitProgram();        // Kaboom!
                 }
-            }
-            return false;
+                else {
+                    _trayIcon.Visible = true;//now can show the icon
+                }
+                
+
+                
+        }
+            return true;
         }
 
-        public bool ProgramAlreadyRuning()// when nano not present , warn and close app
+         public bool ProgramAlreadyRuning()// when nano not present , warn and close app
         {
             if (StartUp.RunningInstance() != null)//check is not already runing before start
             {
                 const string message = "Midi2Vol is already runing ";
                 const string caption = "Nano. Slider";
                 MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                exit.ExitProgram();
+                ExitProgram();
             }
             return false;
         }
 
 
 
-        private void ConfigClick(object sender, EventArgs e)
+        static private void ConfigClick(object sender, EventArgs e)
         {
-            
             StartUp pp = new StartUp();
             string Path = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-            string shortcutfile = Path + "\\"+ Application.ProductName + ".lnk";
+            string shortcutfile = Path + "\\" + Application.ProductName + ".lnk";
             Debug.WriteLine(shortcutfile);
             if (!File.Exists(shortcutfile))
             {
                 pp.CreateStartupFolderShortcut();
-                MessageBox.Show("Now "+Application.ProductName+" will launch on StartUp.");
+                MessageBox.Show("Now " + Application.ProductName + " will launch on StartUp.");
             }
             else
             {
                 pp.DeleteStartupFolderShortcuts(Application.ProductName);
                 MessageBox.Show("Now " + Application.ProductName + " will not launch on StartUp.");
             }
-
-
-
         }
-        private void ExitClick(object sender, EventArgs e)
+         private void ExitClick(object sender, EventArgs e)
         {
-            exit.ExitProgram();
+           ExitProgram();
         }
     }
 }

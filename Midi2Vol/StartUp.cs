@@ -1,17 +1,15 @@
-﻿using System;
-using Microsoft.Win32;
+﻿using IWshRuntimeLibrary;
+using System;
 using System.Diagnostics;
-using System.Reflection;
-using IWshRuntimeLibrary;
-using Shell32;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace Midi2Vol
 {
     public class StartUp
     {
-      
+
         public void CreateStartupFolderShortcut()
         {
             WshShell wshShell = new WshShell();
@@ -33,17 +31,17 @@ namespace Midi2Vol
 
         public void DeleteStartupFolderShortcuts(string targetExeName)
         {
-           
+
             string startUpFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
             string shortcutfile = startUpFolderPath + "\\" + Application.ProductName + ".lnk";
 
             DirectoryInfo di = new DirectoryInfo(startUpFolderPath);
             FileInfo[] files = di.GetFiles("*.lnk");
-                if (System.IO.File.Exists(shortcutfile))
-                {
-                    System.IO.File.Delete(shortcutfile);
-                }
-            
+            if (System.IO.File.Exists(shortcutfile))
+            {
+                System.IO.File.Delete(shortcutfile);
+            }
+
         }
 
         public static Process RunningInstance()
