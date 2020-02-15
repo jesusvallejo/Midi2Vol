@@ -7,11 +7,11 @@ English | [Español](./README-es.md)
 
 
 
-Windows Volume Control for Nano. Slider
+Windows® Volume Control for Nano. Slider
 
 
 This is mainly developed for Nano. Slider, but it can be fairly easily used with any Midi based potentiometer. 
-It is written only for Windows and wont work on any other plataform as it has to be written in OS compatible language (C# in this case with .net framework).
+It is written only for Windows® and wont work on any other plataform as it has to be written in OS compatible language (C# in this case with .net framework).
 
 The app lives in the tray in order to be less intrusive, for the moment the only options are to exit the app and to Add/remove the StartUp run.
 During the app install,it'll be set to run on Start Up by default, if you don't want to run it each boot, just remove it with the Add/remove button.
