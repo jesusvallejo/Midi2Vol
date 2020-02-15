@@ -7,12 +7,12 @@
 
 
 
-Control de Volumen de Windows para Nano. Slider
+Control de Volumen de Windows® para Nano. Slider
 
 
 
 Este proyecto esta desarrollado en principio para Nano. Slider, sin embargo debería ser realmente sencillo crear una versión para cualquier pontenciometro que funcione via MIDI.
-Esta aplicacion funciona solo en windows y en consecuencia no funcionará en ninguna otra plataforma, esto se debe a que ha sido escrita especificamente en C# para poder controlar el volumen del equipo.
+Esta aplicacion funciona solo en Windows® y en consecuencia no funcionará en ninguna otra plataforma, esto se debe a que ha sido escrita especificamente en C# para poder controlar el volumen del equipo.
 
 La aplicación se ejecuta en la bandeja de iconos para ser menos intrusiva, por el momento las únicas opciones son Exit(para cerrar la aplicación) y Add/remove the StartUp run(para añadir o eliminar la ejecución durante el encendido).
 Durante la instalacion la aplicacion sera añadida para su ejecución durante el encendido por defecto, en caso de no querer que esto ocurra podra eliminarla facilmente con la opcion Add/remove the StartUp run.
