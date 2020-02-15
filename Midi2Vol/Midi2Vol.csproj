@@ -7,7 +7,7 @@
     <ProjectGuid>{CD5C11A2-6390-4FFA-AF89-D1D1D355B09F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Midi2Vol</RootNamespace>
-    <AssemblyName>Nano. Slider Midi2Vol</AssemblyName>
+    <AssemblyName>Midi2Vol</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

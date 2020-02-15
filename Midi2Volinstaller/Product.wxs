@@ -2,7 +2,7 @@
 <!-- The name of the product -->
 <?define Name = "Midi2Vol" ?>
 <!-- The Description of the product -->
-<?define Description = "Nano. Slider Midi2Vol" ?>
+<?define Description = "Midi2Vol" ?>
 <!-- The manufacturer, for setup package publisher and folder info -->
 <?define Manufacturer = "JVCSoft" ?>
 <!-- The version number of this setup package-->

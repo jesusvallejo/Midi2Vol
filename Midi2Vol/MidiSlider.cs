@@ -20,25 +20,21 @@ namespace Midi2Vol
         public MidiSlider() {
             nanoSliderTray = new TrayApplicationContext();
             if (!nanoSliderTray.ProgramAlreadyRuning())
-            {
-                
+            {            
                 Task.Run(() => Slider());
                 Application.Run(nanoSliderTray);//run everything before this line or wont be runned
             }
         }
 
         private void Slider()
-        {
-            
+        {        
             try
             {
                 CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;  /// sometimes null reference exception                   
                 while (true)
                 {
-                    Debug.WriteLine("checking change");
                     if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
                     {
-                        Debug.WriteLine("volume update");
                         oldPotVal = potVal;
                         defaultPlaybackDevice.Volume = Math.Ceiling(potVal / 3 * 2.39); // transform 127 scale into 100 scale
                     }
@@ -51,7 +47,6 @@ namespace Midi2Vol
                 Debug.WriteLine(e.StackTrace);
                 CoreAudioDevice defaultCaptureDevice = new CoreAudioController().DefaultCaptureDevice;
                 defaultCaptureDevice.Volume = 100; ///seems to solve the bug, 
-
             }
         }
 

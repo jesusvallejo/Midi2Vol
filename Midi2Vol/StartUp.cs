@@ -1,5 +1,4 @@
 ﻿using IWshRuntimeLibrary;
-using Microsoft.Win32;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -10,20 +9,17 @@ namespace Midi2Vol
 {
     public class StartUp
     {
-
         public void CreateStartupFolderShortcut()
         {
             WshShell wshShell = new WshShell();
             IWshRuntimeLibrary.IWshShortcut shortcut;
             string startUpFolderPath =
               Environment.GetFolderPath(Environment.SpecialFolder.Startup);
-
             // Create the shortcut
             shortcut =
               (IWshRuntimeLibrary.IWshShortcut)wshShell.CreateShortcut(
                 startUpFolderPath + "\\" +
                 Application.ProductName + ".lnk");
-
             shortcut.TargetPath = Application.ExecutablePath;
             shortcut.WorkingDirectory = Application.StartupPath;
             shortcut.Description = "Launch My Application";
@@ -32,7 +28,6 @@ namespace Midi2Vol
 
         public void DeleteStartupFolderShortcuts(string targetExeName)
         {
-
             string startUpFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
             string shortcutfile = startUpFolderPath + "\\" + Application.ProductName + ".lnk";
 
@@ -42,14 +37,12 @@ namespace Midi2Vol
             {
                 System.IO.File.Delete(shortcutfile);
             }
-
         }
 
         public static Process RunningInstance()
         {
             Process current = Process.GetCurrentProcess();
             Process[] processes = Process.GetProcessesByName(current.ProcessName);
-
             //Loop through the running processes in with the same name 
             foreach (Process process in processes)
             {
@@ -58,27 +51,15 @@ namespace Midi2Vol
                 {
                     //Make sure that the process is running from the exe file. 
                     if (Assembly.GetExecutingAssembly().Location.
-                         Replace("/", "\\") == current.MainModule.FileName)
-
+                                                Replace("/", "\\") == current.MainModule.FileName)
                     {
                         //Return the other process instance.  
                         return process;
-
                     }
                 }
             }
             //No other instance was found, return null.  
             return null;
         }
-
-
-
-
-       
-
-        
-
-
-
     }
 }
