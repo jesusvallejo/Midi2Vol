@@ -31,7 +31,9 @@ TODO
 - [x] Separate classes into multiple files to improve readability
 - [x] Add auto launch on boot
 - [x] Add menu to Apply/Remove auto launch on boot
+- [x] Add Hot-Plug support
+- [x] Solved Bug: wont work after sleep mode
 - [ ] One Msi installer, multiple icons that can be selected to fit any Nano. Slider appearance
 - [ ] Ask on install , whether to run on Startup or not
-- [ ] Set proper public/private flags to code
-- [ ] Test stability
+- [x] Set proper public/private flags to code
+- [x] Test stability
