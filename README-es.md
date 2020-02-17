@@ -31,7 +31,7 @@ Este projecto usa las siguientes librerias:
 
 
 TODO
-- [ ] Update code to better integrate official name: Midi2Vol
+- [x] Update code to better integrate official name: Midi2Vol
 - [x] Msi installer
 - [x] Edition Icon
 - [x] Separate classes into multiple files to improve readability
