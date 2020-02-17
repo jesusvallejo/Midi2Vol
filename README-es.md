@@ -40,7 +40,8 @@ TODO
 - [x] Add menu to Apply/Remove auto launch on boot
 - [x] Add Hot-Plug support
 - [x] Solved Bug: wont work after sleep mode
-- [ ] One Msi installer, multiple icons that can be selected to fit any Nano. Slider appearance
+- ~~[ ] One Msi installer, multiple icons that can be selected to fit any Nano. Slider appearance~~ Deprecated
 - [ ] Ask on install , whether to run on Startup or not
 - [x] Set proper public/private flags to code
 - [x] Test stability
+- [ ] Allow control when changing audio output Devices
