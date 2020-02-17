@@ -56,6 +56,7 @@ namespace Midi2Vol
 
          public bool ProgramAlreadyRuning()// 
         {
+            
             if (StartUp.RunningInstance() != null)//check is not already runing before start
             {
                 const string message = "Midi2Vol is already runing.";

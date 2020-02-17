@@ -1,4 +1,6 @@
-﻿using AudioSwitcher.AudioApi.CoreAudio;
+﻿//deprecated was too slow
+//using AudioSwitcher.AudioApi.CoreAudio; 
+using NAudio.CoreAudioApi;
 using Microsoft.Win32;
 using NAudio.Midi;
 using System;
@@ -18,25 +20,33 @@ namespace Midi2Vol
         bool showed = false;
         TrayApplicationContext nanoSliderTray ;
         public MidiSlider() {
+
             nanoSliderTray = new TrayApplicationContext();
             if (!nanoSliderTray.ProgramAlreadyRuning())
             {            
                 Task.Run(() => Slider());
                 Application.Run(nanoSliderTray);//run everything before this line or wont be runned
             }
+          
         }
+
 
         private void Slider()
         {        
             try
             {
-                CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;  /// sometimes null reference exception                   
+                //deprecated was too slow
+                //CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;  /// sometimes null reference exception                   
+                MMDeviceEnumerator devEnum = new MMDeviceEnumerator();
+                MMDevice defaultDevice = devEnum.GetDefaultAudioEndpoint(DataFlow.Render, Role.Multimedia);
                 while (true)
                 {
                     if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
                     {
                         oldPotVal = potVal;
-                        defaultPlaybackDevice.Volume = Math.Ceiling(potVal / 3 * 2.39); // transform 127 scale into 100 scale
+                        // deprecated //deprecated was too slow
+                        //defaultPlaybackDevice.Volume = Math.Ceiling(potVal / 3 * 2.39); // transform 127 scale into 100 scale
+                        defaultDevice.AudioEndpointVolume.MasterVolumeLevelScalar = (float)(Math.Floor((potVal / 3 * 2.39)) / 100);                        
                     }
                     NanoFind();
                     Thread.Sleep(100);
@@ -45,8 +55,9 @@ namespace Midi2Vol
             catch (NullReferenceException e)
             {
                 Debug.WriteLine(e.StackTrace);
-                CoreAudioDevice defaultCaptureDevice = new CoreAudioController().DefaultCaptureDevice;
-                defaultCaptureDevice.Volume = 100; ///seems to solve the bug, 
+                // deprecated //deprecated was too slow
+                //CoreAudioDevice defaultCaptureDevice = new CoreAudioController().DefaultCaptureDevice;
+                //defaultCaptureDevice.Volume = 100; ///seems to solve the bug, 
             }
         }
 

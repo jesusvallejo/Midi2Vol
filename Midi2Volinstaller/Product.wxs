@@ -9,6 +9,7 @@
 <?define Version = "0.0.1.4" ?>
 <!-- Icon-->
 <?define Icon = "Resources\NanoSlider.ico" ?>
+<?define Licence = "Resources\Licence.rtf" ?>
 <!-- UpgradeCode must be unique and not changed once the first version of the program is installed. -->
 <?define UpgradeCode = "{f187a295-f8c9-4596-acd0-3355838d8ee3}" ?>
 
@@ -17,17 +18,17 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="83cfbf72-b8bd-45a9-bc2f-29e56d8da6ad" Name="$(var.Name)" Language="1033" Version="$(var.Version)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <WixVariable Id="WixUILicenseRtf" Value="Resources\Licence.rtf" />
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.Licence)" />
     <Icon Id="icon.ico" SourceFile="$(var.Icon)"/>
     <Icon Id="Midi2Vol.exe" SourceFile="$(var.Icon)"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
     <Upgrade Id="$(var.UpgradeCode)">
-      <UpgradeVersion
+    <UpgradeVersion
          Minimum="1.0.0.0" Maximum="99.0.0.0"
          Property="PREVIOUSVERSIONSINSTALLED"
-         IncludeMinimum="yes" IncludeMaximum="no" />
+         IncludeMinimum="no" IncludeMaximum="no" />
     </Upgrade>
     <Media Id="1" Cabinet="Cab1.cab" EmbedCab="yes" />
     <Feature Id="ProductFeature" Title="Midi2Vol" Level="1">
