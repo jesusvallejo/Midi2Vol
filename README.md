@@ -25,7 +25,8 @@ Nevertheless any change, update or upgrade is welcomed.
 
 This project uses the following libraries:
 
-- AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
+~~- AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher~~ 
+Deprecated now it only uses NAudio, AudioSwitcher was slow at init
 - NAudio: https://github.com/naudio/NAudio
 
 TODO
