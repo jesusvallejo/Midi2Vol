@@ -26,7 +26,8 @@ Siempre se agradece cualquier mejora o propuesta.
 
 Este projecto usa las siguientes librerias:
 
-- AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher
+- ~~AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher~~ 
+      En desuso, ahora usa NAudio, AudioSwitcher inicializaba muy lento 
 - NAudio: https://github.com/naudio/NAudio
 
 
