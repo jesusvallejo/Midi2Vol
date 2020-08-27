@@ -7,7 +7,7 @@
 
 
 
-Control de Volumen de Windows® para Nano. Slider
+Control de Volumen de Windows® para Nano. Slider -- [Linux](https://github.com/jesusvallejo/Midi2Vol-Linux)
 
 
 
