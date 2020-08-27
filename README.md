@@ -9,7 +9,7 @@ English | [Español](./README-es.md)
 
 
 
-Windows® Volume Control for Nano. Slider -- Linux(https://github.com/jesusvallejo/Midi2Vol-Linux)
+Windows® Volume Control for Nano. Slider -- [Linux](https://github.com/jesusvallejo/Midi2Vol-Linux)
 
 
 This is mainly developed for Nano. Slider, but it can be fairly easily used with any Midi based potentiometer. 
