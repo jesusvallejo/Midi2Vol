@@ -17,7 +17,6 @@
   {
     "name": "Google Chrome",
     "AppRaw": "0x41",
-    "PulseName": "Google Chrome"
+    "PulseName": "chrome"
   }
-
 ]

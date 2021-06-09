@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using NAudio.Midi;
 using System;
 using System.Diagnostics;
@@ -48,46 +47,49 @@ namespace Midi2Vol
             try
             {
                 float volume;
-                while (true)
+                using (var enumerator = new CSCore.CoreAudioAPI.MMDeviceEnumerator())
                 {
-                    if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
+                    while (true)
                     {
-                        oldPotVal = potVal;
-                        volume = (float)(Math.Floor((potVal / 3 * 2.39)) / 100);
-                        if (contVal == 62) 
+                        if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
                         {
+                            oldPotVal = potVal;
+                            volume = (float)(Math.Floor((potVal / 3 * 2.39)) / 100);
+                            if (contVal == 62)
+                            {
 
-                            ChangeAllVolume(volume);
+                                ChangeAllVolume(volume, enumerator);
+                            }
+                            else
+                            {
+                                ChangeAppVolume(volume, enumerator);
+                            }
                         }
-                        else
-                        {
-                            ChangeAppVolume(volume);
-                        }
+                        NanoFind();
+                        Thread.Sleep(100);
                     }
-                    NanoFind();
-                    Thread.Sleep(100);
                 }
             }
             catch (NullReferenceException e)
             {
                 Debug.WriteLine(e.StackTrace);
             }
+        
         }
 
 
-        void ChangeAllVolume(float volume) {
+        void ChangeAllVolume(float volume, MMDeviceEnumerator enumerator) { 
 
-            using (var mme = new CSCore.CoreAudioAPI.MMDeviceEnumerator())
-            using (var device = mme.GetDefaultAudioEndpoint(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.Role.Multimedia))
+        
+            using (var device = enumerator.GetDefaultAudioEndpoint(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.Role.Multimedia))
             using (var endpointVolume = CSCore.CoreAudioAPI.AudioEndpointVolume.FromDevice(device))
             {
                 endpointVolume.SetMasterVolumeLevelScalar(volume, Guid.Empty);
             }
         }
 
-        void ChangeAppVolume(float volume)
+        void ChangeAppVolume(float volume,MMDeviceEnumerator enumerator)
         {
-            using (var enumerator = new CSCore.CoreAudioAPI.MMDeviceEnumerator())
             using (var sessionManager = GetDefaultAudioSessionManager2(enumerator, CSCore.CoreAudioAPI.DataFlow.Render))
             using (var device = enumerator.EnumAudioEndpoints(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.DeviceState.Active))
             {
@@ -95,18 +97,27 @@ namespace Midi2Vol
                 {
                     foreach (var session in sessionEnumerator)
                     {
-                        using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName does nt work with a lot of applications
+                        using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName doesnt work with a lot of applications
                         using (var simpleVolume = session.QueryInterface<CSCore.CoreAudioAPI.SimpleAudioVolume>())
                         {
                             String name = Process.GetProcessById(session2.ProcessID).ProcessName;
-                            String target = "";
-                            foreach (var app in apps){
-                                int num = Int32.Parse(app.AppRaw, System.Globalization.NumberStyles.HexNumber);
-                                if (num == contVal) {
-                                    target = app.PulseName;
+                            String target = null;
+                            foreach (var app in apps) {
+                                if (app.AppRaw != null) {
+                                    int num;
+                                    if (app.AppRaw.StartsWith("0x"))
+                                    {
+                                         num = Int32.Parse(app.AppRaw.Substring(2), System.Globalization.NumberStyles.HexNumber);
+                                    }
+                                    else {
+                                         num = Int32.Parse(app.AppRaw, System.Globalization.NumberStyles.HexNumber);
+                                    }
+                                    if (num == contVal) {
+                                        target = app.PulseName;
+                                    }
                                 }
                             }
-                            if (name == target && target != "")
+                            if (name == target && target != null)
                             {
                                 simpleVolume.MasterVolume = volume;
                             }
