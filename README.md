@@ -27,21 +27,18 @@ Nevertheless any change, update or upgrade is welcomed.
 
 This project uses the following libraries:
 
-- ~~AudioSwitcher.AudioApi.CoreAudio : https://github.com/xenolightning/AudioSwitcher~~ 
-Deprecated now it only uses NAudio, AudioSwitcher was slow at init
+Midi handling:
 - NAudio: https://github.com/naudio/NAudio
+Volume handling:
+- CSCore: https://github.com/filoe/cscore
 
 TODO
-- [x] Update code to better integrate official name: Midi2Vol
-- [x] Msi installer
-- [x] Edition Icon
-- [x] Separate classes into multiple files to improve readability
 - [x] Add auto launch on boot
 - [x] Add menu to Apply/Remove auto launch on boot
 - [x] Add Hot-Plug support
-- [x] Solved Bug: wont work after sleep mode
-- ~~[ ] One Msi installer, multiple icons that can be selected to fit any Nano. Slider appearance~~ Deprecated
-- [ ] Ask on install , whether to run on Startup or not
-- [x] Set proper public/private flags to code
 - [x] Test stability
-- [ ] Allow control when changing audio output Devices
+- [X] Allow control when changing audio output Devices
+- [x] Allow per App volume control
+ ~~[ ] Ask on install , whether to run on Startup or not~~ Deprecated
+ ~~[ ] One Msi installer, multiple icons that can be selected to fit any Nano. Slider appearance~~ Deprecated
+ ~~- [x] Msi installer~~ Deprecated
