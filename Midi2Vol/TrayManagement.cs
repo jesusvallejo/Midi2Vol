@@ -31,6 +31,7 @@ namespace Midi2Vol
             Application.Exit();           // closed everything
             Environment.Exit(1);         // Kaboom!
         }
+        // will change it to a notification
          public bool NanoNotPresentMB(bool showed)// when nano not present , warn and close app
         {
             if (showed == false) {
@@ -65,6 +66,20 @@ namespace Midi2Vol
                 ExitProgram();
             }
             return false;
+        }
+        public void midiAlredyInUse()// 
+        {
+                const string message = "Nano. Slider is already in use by another application.";
+                const string caption = "Midi2Vol";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ExitProgram();
+       }
+        public void thereWasAnIssue(String issue)// 
+        {
+             string message = "The was an issue with:"+issue+"\n Exiting Program";
+             string caption = "Midi2Vol";
+            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            ExitProgram();
         }
 
         static private void ConfigClick(object sender, EventArgs e)

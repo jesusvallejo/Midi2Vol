@@ -1,0 +1,23 @@
+[
+  {
+    "name": "default",
+    "AppRaw": "0x3E",
+    "PulseName": "default"
+  },
+  {
+    "name": "Spotify",
+    "AppRaw": "0x3F",
+    "PulseName": "Spotify"
+  },
+  {
+    "name": "Discord",
+    "AppRaw": "0x40",
+    "PulseName": "Discord"
+  },
+  {
+    "name": "Google Chrome",
+    "AppRaw": "0x41",
+    "PulseName": "Google Chrome"
+  }
+
+]
