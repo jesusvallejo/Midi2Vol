@@ -39,6 +39,4 @@ TODO
 - [x] Test stability
 - [X] Allow control when changing audio output Devices
 - [x] Allow per App volume control
- ~~[ ] Ask on install , whether to run on Startup or not~~ Deprecated
- ~~[ ] One Msi installer, multiple icons that can be selected to fit any Nano. Slider appearance~~ Deprecated
- ~~- [x] Msi installer~~ Deprecated
+
