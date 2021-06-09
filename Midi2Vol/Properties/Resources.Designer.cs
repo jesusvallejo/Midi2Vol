@@ -93,9 +93,9 @@ namespace Midi2Vol.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
-        public static System.Drawing.Icon NanoWavez {
+        public static System.Drawing.Icon NanoSliderDis {
             get {
-                object obj = ResourceManager.GetObject("NanoWavez", resourceCulture);
+                object obj = ResourceManager.GetObject("NanoSliderDis", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

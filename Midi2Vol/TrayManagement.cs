@@ -20,13 +20,27 @@ namespace Midi2Vol
         }
 
         public void Ready() {
-              _trayIcon.BalloonTipText = "Midi2Vol is now ready.";
+            _trayIcon.Visible = false;//to avoid showing two icons in the traybar
+            _trayIcon.Icon = Properties.Resources.NanoSlider;
+            _trayIcon.Visible = true;//to avoid showing two icons in the traybar
+            _trayIcon.BalloonTipText = "Midi2Vol is now ready.";
               _trayIcon.BalloonTipTitle = "Midi2Vol";
               _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
-              _trayIcon.ShowBalloonTip(500);
+              _trayIcon.ShowBalloonTip(0);
             
         }
-         private void ExitProgram()
+        public void notReady()
+        {
+            _trayIcon.Visible = false;//to avoid showing two icons in the traybar
+            _trayIcon.Icon = Properties.Resources.NanoSliderDis;
+            _trayIcon.Visible = true;//to avoid showing two icons in the traybar
+            _trayIcon.BalloonTipText = "Midi2Vol is not connected.";
+            _trayIcon.BalloonTipTitle = "Midi2Vol";
+            _trayIcon.BalloonTipIcon = ToolTipIcon.Error;
+            _trayIcon.ShowBalloonTip(250);
+
+        }
+        private void ExitProgram()
         {
             Application.Exit();           // closed everything
             Environment.Exit(1);         // Kaboom!
@@ -34,24 +48,11 @@ namespace Midi2Vol
         // will change it to a notification
          public bool NanoNotPresentMB(bool showed)// when nano not present , warn and close app
         {
+            
             if (showed == false) {
             showed = true;
-            _trayIcon.Visible = false;//to avoid showing two icons in the traybar  
-            const string message = "Nano. Slider not found, please connect it. Do you want to close Midi2Vol? ";
-            const string caption = "Midi2Vol";
-            var result = MessageBox.Show(message, caption,
-                                         MessageBoxButtons.OKCancel,
-                                         MessageBoxIcon.Error);
-                // If the button was pressed ...
-                if (result == DialogResult.OK)
-                {
-                    // close the app.
-                    ExitProgram();        // Kaboom!
-                }
-                else {
-                    _trayIcon.Visible = true;//now can show the icon
-                }                              
-        }
+                notReady();
+            }
             return true;
         }
 

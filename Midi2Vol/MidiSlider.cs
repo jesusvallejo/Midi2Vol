@@ -30,7 +30,6 @@ namespace Midi2Vol
         TrayApplicationContext nanoSliderTray;
         public MidiSlider()
         {
-
             String jsonString = File.ReadAllText("config.json");
             apps = JsonConvert.DeserializeObject<List<App>>(jsonString);
             nanoSliderTray = new TrayApplicationContext();
@@ -65,8 +64,17 @@ namespace Midi2Vol
                                 ChangeAppVolume(volume, enumerator);
                             }
                         }
-                        NanoFind();
-                        Thread.Sleep(100);
+                        if (nanoID == -1)
+                        {
+                            // if nano undetected poll slower
+                            NanoFind();
+                            Thread.Sleep(1000);
+                        }
+                        else
+                        {
+                            NanoFind();
+                            Thread.Sleep(100);
+                        }
                     }
                 }
             }
@@ -148,7 +156,7 @@ namespace Midi2Vol
             }
         }
 
-        private int NanoFind()
+        private int NanoFind() //polling is mandatory, naudio does not implement a watcher
         {
             for (int device = 0; device < MidiIn.NumberOfDevices; device++)
             {
@@ -190,9 +198,6 @@ namespace Midi2Vol
                 potVal = cce.ControllerValue;
             }
         }
-
-
-
     }
     public class App {
         public App() { }
