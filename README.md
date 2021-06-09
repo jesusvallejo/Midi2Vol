@@ -29,6 +29,7 @@ This project uses the following libraries:
 
 Midi handling:
 - NAudio: https://github.com/naudio/NAudio
+
 Volume handling:
 - CSCore: https://github.com/filoe/cscore
 
