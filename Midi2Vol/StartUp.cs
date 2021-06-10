@@ -49,13 +49,8 @@ namespace Midi2Vol
                 //Ignore the current process 
                 if (process.Id != current.Id)
                 {
-                    //Make sure that the process is running from the exe file. 
-                    if (Assembly.GetExecutingAssembly().Location.
-                                                Replace("/", "\\") == current.MainModule.FileName)
-                    {
                         //Return the other process instance.  
-                        return process;
-                    }
+                        return process; 
                 }
             }
             //No other instance was found, return null.  

@@ -46,7 +46,7 @@ namespace Midi2Vol
             Environment.Exit(1);         // Kaboom!
         }
         // will change it to a notification
-         public bool NanoNotPresentMB(bool showed)// when nano not present , warn and close app
+         public bool NanoNotPresentMB(bool showed)// when nano not present , warn and wait for connection;
         {
             
             if (showed == false) {
@@ -59,7 +59,7 @@ namespace Midi2Vol
          public bool ProgramAlreadyRuning()// 
         {
             
-            if (StartUp.RunningInstance() != null)//check is not already runing before start
+            if (StartUp.RunningInstance() != null)//check is not already running before start
             {
                 const string message = "Midi2Vol is already runing.";
                 const string caption = "Midi2Vol";
