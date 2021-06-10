@@ -73,10 +73,7 @@ Volume handling:
 - CSCore: https://github.com/filoe/cscore
 
 TODO
-- [x] Add auto launch on boot
-- [x] Add menu to Apply/Remove auto launch on boot
-- [x] Add Hot-Plug support
-- [x] Test stability
-- [X] Allow control when changing audio output Devices
-- [x] Allow per App volume control
+- [ ] Check wether the AppRaw input in config menu is an hex.
+- [ ] Make it easier for user to change app icons.(not sure if possible)
+
 
