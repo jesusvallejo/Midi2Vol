@@ -16,7 +16,7 @@ It is written only for Windows® and wont work on any other plataform as it has 
 
 The app lives in the tray in order to be less intrusive, for the moment the only options are to exit the app and to Add/remove the StartUp run.
 
-This version has per app control, it can be configured via the config menu button or editing config.json,to add/edit more apps.In order to make ti work  we have to change some things on the qmk keymap,instancitate an app variable as 0x3E,``` uint8_t app = 0x3E; ``` , on slider function we have to change midi_send_cc to ```midi_send_cc(&midi_device, 2, app, 0x7F - (analogReadPin(SLIDER_PIN) >> 3));``` and last use the macro utility to change ``` app ``` value to what ever is configured in the config.json
+This version has per app volume control as well as current device volume control, it can be configured via the config menu button or editing config.json,to add/edit more apps.In order to make ti work  we have to change some things on the qmk keymap,instancitate an app variable as 0x3E,``` uint8_t app = 0x3E; ``` , on slider function we have to change midi_send_cc to ```midi_send_cc(&midi_device, 2, app, 0x7F - (analogReadPin(SLIDER_PIN) >> 3));``` and last use the macro utility to change ``` app ``` value to what ever is configured in the config.json
 
 ex:
 ```
