@@ -56,7 +56,6 @@ namespace Midi2Vol
                             volume = (float)(Math.Floor((potVal / 3 * 2.39)) / 100);
                             if (contVal == 62)
                             {
-
                                 ChangeAllVolume(volume, enumerator);
                             }
                             else
@@ -82,13 +81,12 @@ namespace Midi2Vol
             {
                 Debug.WriteLine(e.StackTrace);
             }
-        
+
         }
 
 
-        void ChangeAllVolume(float volume, MMDeviceEnumerator enumerator) { 
-
-        
+        void ChangeAllVolume(float volume, MMDeviceEnumerator enumerator)
+        {
             using (var device = enumerator.GetDefaultAudioEndpoint(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.Role.Multimedia))
             using (var endpointVolume = CSCore.CoreAudioAPI.AudioEndpointVolume.FromDevice(device))
             {
@@ -96,7 +94,7 @@ namespace Midi2Vol
             }
         }
 
-        void ChangeAppVolume(float volume,MMDeviceEnumerator enumerator)
+        void ChangeAppVolume(float volume, MMDeviceEnumerator enumerator)
         {
             using (var sessionManager = GetDefaultAudioSessionManager2(enumerator, CSCore.CoreAudioAPI.DataFlow.Render))
             using (var device = enumerator.EnumAudioEndpoints(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.DeviceState.Active))
@@ -110,17 +108,21 @@ namespace Midi2Vol
                         {
                             String name = Process.GetProcessById(session2.ProcessID).ProcessName;
                             String target = null;
-                            foreach (var app in apps) {
-                                if (app.AppRaw != null) {
+                            foreach (var app in apps)
+                            {
+                                if (app.AppRaw != null)
+                                {
                                     int num;
                                     if (app.AppRaw.StartsWith("0x"))
                                     {
-                                         num = Int32.Parse(app.AppRaw.Substring(2), System.Globalization.NumberStyles.HexNumber);
+                                        num = Int32.Parse(app.AppRaw.Substring(2), System.Globalization.NumberStyles.HexNumber);
                                     }
-                                    else {
-                                         num = Int32.Parse(app.AppRaw, System.Globalization.NumberStyles.HexNumber);
+                                    else
+                                    {
+                                        num = Int32.Parse(app.AppRaw, System.Globalization.NumberStyles.HexNumber);
                                     }
-                                    if (num == contVal) {
+                                    if (num == contVal)
+                                    {
                                         target = app.PulseName;
                                     }
                                 }
@@ -199,15 +201,17 @@ namespace Midi2Vol
             }
         }
     }
-    public class App {
+    public class App
+    {
         public App() { }
-        public App(String name, String AppRaw, String PulseName) {
+        public App(String name, String AppRaw, String PulseName)
+        {
             this.name = name;
             this.AppRaw = AppRaw;
             this.PulseName = PulseName;
         }
         public String name { get; set; }
-        public String AppRaw{ get; set; }
+        public String AppRaw { get; set; }
         public String PulseName { get; set; }
     }
 }

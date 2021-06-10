@@ -2,7 +2,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace Midi2Vol
@@ -30,7 +29,6 @@ namespace Midi2Vol
         {
             string startUpFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
             string shortcutfile = startUpFolderPath + "\\" + Application.ProductName + ".lnk";
-
             DirectoryInfo di = new DirectoryInfo(startUpFolderPath);
             FileInfo[] files = di.GetFiles("*.lnk");
             if (System.IO.File.Exists(shortcutfile))
@@ -49,8 +47,8 @@ namespace Midi2Vol
                 //Ignore the current process 
                 if (process.Id != current.Id)
                 {
-                        //Return the other process instance.  
-                        return process; 
+                    //Return the other process instance.  
+                    return process;
                 }
             }
             //No other instance was found, return null.  
