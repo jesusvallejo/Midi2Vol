@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
@@ -7,13 +9,16 @@ namespace Midi2Vol
 {
     public class TrayApplicationContext : ApplicationContext
     {
-        static NotifyIcon _trayIcon = new NotifyIcon();
+         NotifyIcon _trayIcon = new NotifyIcon();
+         public List<App> apps;
         public TrayApplicationContext()
         {
+            
             ContextMenu _trayMenu = new ContextMenu { };
             _trayIcon.Icon = Properties.Resources.NanoSlider;
             _trayIcon.Text = "Midi2Vol";
-            _trayMenu.MenuItems.Add("Add/Remove Run on StartUp", ConfigClick);
+            _trayMenu.MenuItems.Add("Config", configClick);
+            _trayMenu.MenuItems.Add("Add/Remove Run on StartUp", startupClick);
             _trayMenu.MenuItems.Add("E&xit", ExitClick);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
@@ -88,21 +93,43 @@ namespace Midi2Vol
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
             ExitProgram();
         }
+         private void configClick(object sender, EventArgs e) {
+            Config config = new Config(); 
+            apps = config.SourceConfig();
+            Edit edit = new Edit(apps);
+            edit.Show();
+            edit.FormClosed += new FormClosedEventHandler(edit_FormClosed);
 
-        static private void ConfigClick(object sender, EventArgs e)
+        }
+
+         void edit_FormClosed(object sender, FormClosedEventArgs e)
         {
-            StartUp pp = new StartUp();
+            string message = "Saving information, relaunching Midi2Vol";
+            string caption = "Midi2Vol";
+            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Config config = new Config();
+            config.saveConfig(apps);
+            Application.Restart();
+            Environment.Exit(0);
+
+
+        }
+
+
+        static private void startupClick(object sender, EventArgs e)
+        {
+            StartUp start = new StartUp();
             string Path = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
             string shortcutfile = Path + "\\" + Application.ProductName + ".lnk";
             Debug.WriteLine(shortcutfile);
             if (!File.Exists(shortcutfile))
             {
-                pp.CreateStartupFolderShortcut();
+                start.CreateStartupFolderShortcut();
                 MessageBox.Show("Now " + Application.ProductName + " will launch on StartUp.");
             }
             else
             {
-                pp.DeleteStartupFolderShortcuts(Application.ProductName);
+                start.DeleteStartupFolderShortcuts(Application.ProductName);
                 MessageBox.Show("Now " + Application.ProductName + " will not launch on StartUp.");
             }
         }

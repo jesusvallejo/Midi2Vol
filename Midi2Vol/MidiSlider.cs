@@ -26,12 +26,11 @@ namespace Midi2Vol
         private int potVal = -1;// potentiometer resistence value
         private int oldPotVal = -1; // value to check with the old value
         bool showed = false;
-        List<App> apps;
+        private List<App> apps;
         TrayApplicationContext nanoSliderTray;
-        public MidiSlider()
+        public MidiSlider(List<App> apps)
         {
-            String jsonString = File.ReadAllText("config.json");
-            apps = JsonConvert.DeserializeObject<List<App>>(jsonString);
+            this.apps = apps;
             nanoSliderTray = new TrayApplicationContext();
             if (!nanoSliderTray.ProgramAlreadyRuning())
             {
@@ -108,7 +107,7 @@ namespace Midi2Vol
                         {
                             String name = Process.GetProcessById(session2.ProcessID).ProcessName;
                             String target = null;
-                            foreach (var app in apps)
+                            foreach (var app in apps)  // mb change this with find or smt
                             {
                                 if (app.AppRaw != null)
                                 {
@@ -123,7 +122,7 @@ namespace Midi2Vol
                                     }
                                     if (num == contVal)
                                     {
-                                        target = app.PulseName;
+                                        target = app.ProcessName;
                                     }
                                 }
                             }
@@ -201,17 +200,5 @@ namespace Midi2Vol
             }
         }
     }
-    public class App
-    {
-        public App() { }
-        public App(String name, String AppRaw, String PulseName)
-        {
-            this.name = name;
-            this.AppRaw = AppRaw;
-            this.PulseName = PulseName;
-        }
-        public String name { get; set; }
-        public String AppRaw { get; set; }
-        public String PulseName { get; set; }
-    }
+    
 }

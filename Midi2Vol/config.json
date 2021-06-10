@@ -1,22 +1,22 @@
 [
   {
-    "name": "default",
+    "name": "Default",
     "AppRaw": "0x3E",
-    "PulseName": "default"
+    "ProcessName": "default"
   },
   {
     "name": "Spotify",
     "AppRaw": "0x3F",
-    "PulseName": "Spotify"
+    "ProcessName": "Spotify"
   },
   {
     "name": "Discord",
     "AppRaw": "0x40",
-    "PulseName": "Discord"
+    "ProcessName": "Discord"
   },
   {
     "name": "Google Chrome",
     "AppRaw": "0x41",
-    "PulseName": "chrome"
+    "ProcessName": "chrome"
   }
 ]
