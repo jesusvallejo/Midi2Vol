@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -13,7 +12,6 @@ namespace Midi2Vol
          public List<App> apps;
         public TrayApplicationContext()
         {
-            
             ContextMenu _trayMenu = new ContextMenu { };
             _trayIcon.Icon = Properties.Resources.NanoSlider;
             _trayIcon.Text = "Midi2Vol";
@@ -35,7 +33,6 @@ namespace Midi2Vol
             _trayIcon.BalloonTipTitle = "Midi2Vol";
             _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
             _trayIcon.ShowBalloonTip(0);
-
         }
         public void notReady()
         {
@@ -46,7 +43,6 @@ namespace Midi2Vol
             _trayIcon.BalloonTipTitle = "Midi2Vol";
             _trayIcon.BalloonTipIcon = ToolTipIcon.Error;
             _trayIcon.ShowBalloonTip(250);
-
         }
         private void ExitProgram()
         {
@@ -98,12 +94,12 @@ namespace Midi2Vol
             apps = config.SourceConfig();
             Edit edit = new Edit(apps);
             edit.Show();
-            edit.FormClosed += new FormClosedEventHandler(edit_FormClosed);
-
+            edit.FormClosed += new FormClosedEventHandler(edit_FormClosed) ;
         }
 
          void edit_FormClosed(object sender, FormClosedEventArgs e)
         {
+            
             string message = "Saving information, relaunching Midi2Vol";
             string caption = "Midi2Vol";
             MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -111,8 +107,6 @@ namespace Midi2Vol
             config.saveConfig(apps);
             Application.Restart();
             Environment.Exit(0);
-
-
         }
 
 

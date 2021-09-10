@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Midi2Vol
@@ -14,6 +8,7 @@ namespace Midi2Vol
     {
         private List<App> apps;
         App currentApp;
+        bool save = false;
         public Edit(List<App> apps)
         {
             this.apps = apps;
@@ -26,7 +21,7 @@ namespace Midi2Vol
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            save = true;
             if (textBox1.Text != "" && textBox2.Text != "" && textBox3.Text != "")
             {
                 foreach (App app in apps)
@@ -77,6 +72,16 @@ namespace Midi2Vol
                 textBox2.Update();
                 textBox3.Update();
             }
+        }
+
+        private void Edit_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        public bool  getSave()
+        {
+            return save;
         }
     }
 }

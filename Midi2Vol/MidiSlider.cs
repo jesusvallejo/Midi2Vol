@@ -6,8 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSCore.CoreAudioAPI;
-using System.IO;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 
 /// <summary>
@@ -49,10 +47,10 @@ namespace Midi2Vol
                 {
                     while (true)
                     {
-                        if (potVal != oldPotVal && (potVal > oldPotVal + 3 || potVal < oldPotVal - 3)) // prevents ghost slides
+                        if (potVal != oldPotVal && (potVal > oldPotVal + 1 || potVal < oldPotVal - 1)) // prevents ghost slides
                         {
                             oldPotVal = potVal;
-                            volume = (float)(Math.Floor((potVal / 3 * 2.39)) / 100);
+                            volume = (float)(Math.Floor((potVal / 3 * 2.395)) / 100);
                             if (contVal == 62)
                             {
                                 ChangeAllVolume(volume, enumerator);
