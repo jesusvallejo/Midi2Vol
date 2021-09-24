@@ -100,9 +100,9 @@ namespace Midi2Vol
          void edit_FormClosed(object sender, FormClosedEventArgs e)
         {
             
-            string message = "Saving information, relaunching Midi2Vol";
-            string caption = "Midi2Vol";
-            MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //string message = "Saving information, relaunching Midi2Vol";
+            //string caption = "Midi2Vol";
+            //MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Config config = new Config();
             config.saveConfig(apps);
             Application.Restart();

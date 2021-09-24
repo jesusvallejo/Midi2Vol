@@ -52,6 +52,9 @@ namespace Midi2Vol
                 listBox1.ClearSelected();
                 apps.Remove(currentApp);
                 listBox1.Items.Remove(currentApp.name);
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
             }
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

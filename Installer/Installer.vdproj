@@ -231,6 +231,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -814,15 +822,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Midi2Vol"
-        "ProductCode" = "8:{0413E3BE-4EB6-422C-9705-DB18D7871134}"
-        "PackageCode" = "8:{7407577A-B3A2-4705-901D-20B36C29D0B4}"
+        "ProductCode" = "8:{A3297332-65AF-43DA-9FFA-AF175746536D}"
+        "PackageCode" = "8:{A45C68CC-B17F-4E72-9B12-1710E876A97E}"
         "UpgradeCode" = "8:{BC007B71-46FE-4F85-92C0-F0CCCD9ED5CD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.0.6"
+        "ProductVersion" = "8:0.0.7"
         "Manufacturer" = "8:JVCSoft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/jesusvallejo/Midi2Vol"
