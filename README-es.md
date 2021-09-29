@@ -21,6 +21,8 @@ Esta versión tiene control de volumen para aplicaciones(Usa el mixer de windows
 Estos ajustes se pueden modificar usando el botón config o editando el archivo config.json(se encuentra en el directorio 
 ```\user\AppData\midi2vol\```, se recomienda usar el menu para evitar problemas de parsing en el archivo).
 
+Para que este software funcione jundo con el Nano. Slider tendrás que añadir unas lineas de codigo a tu keymap, o usar este: https://github.com/jesusvallejo/nanokeymaps/ (Incluye el .hex compilado para facilitar el flasheo y probar las funciones del software)
+
 Se incluyen [binarios ](https://github.com/jesusvallejo/Midi2Vol/releases) para su instalación, sin embargo recomiendo que lo compiles tu mismo.
 Los binarios vienen sin firmar ya que el certificado cuesta anualmente.
 
