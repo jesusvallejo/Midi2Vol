@@ -15,7 +15,9 @@ Este proyecto esta desarrollado en principio para [Nano. Slider](https://www.kee
 Esta aplicacion funciona solo en Windows®([Version para Linux](https://github.com/jesusvallejo/Midi2Vol-Linux)).
 
 La aplicación se ejecuta en la bandeja de iconos para ser menos intrusiva.
-Esta version tiene control de volumen para aplicaciones(Usa el mixer de windows y puede controlar el volumen de aplicaciones como Spotify o Google Chrome) y dispositivos(Ademas puede controlar el volumen del dispositivo del sistema que reproduce sonido en ese momento, auriculares, altavoces).
+
+Esta version tiene control de volumen para aplicaciones(Usa el mixer de windows y puede controlar el volumen de aplicaciones como Spotify o Google Chrome) y dispositivos(Además puede controlar el volumen del dispositivo del sistema que reproduce sonido en ese momento, auriculares, altavoces).
+
 Estos ajustes se pueden modificar usando el boton config o editando el archivo config.json(se encuentra en el directorio 
 ```\user\AppData\midi2vol\```, se recomienda usar el menu para evitar problemas de parsing en el archivo).
 
