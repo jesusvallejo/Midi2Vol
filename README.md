@@ -22,7 +22,7 @@ In order to make it work you will need to add some code to your keymap,or pehaps
 
 Remember to use different hex values. Default volume value is: ```0x3E```.
 
-I'll provice a [binary files](https://github.com/jesusvallejo/Midi2Vol/releases) but i recommend you to compile it by yourself.Binaries are unsigned as the certificate costs money per year.
+I'll provice [binary files](https://github.com/jesusvallejo/Midi2Vol/releases) but i recommend you to compile it by yourself.Binaries are unsigned as the certificate costs money per year.
 
 It is provided as is, and it comes with no guarantee.(see [Licence](https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/LICENSE))
 
