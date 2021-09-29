@@ -11,12 +11,12 @@ English | [Español](./README-es.md)
 
 Windows® Volume Control for Nano. Slider -- [Linux](https://github.com/jesusvallejo/Midi2Vol-Linux)
 
-This is mainly developed for [Nano. Slider](https://www.keebwerk.com/nano-slider/), but it can be fairly easily used with any Midi based potentiometer. 
-It is written only for Windows® and wont work on any other plataform as it has to be written in OS compatible language (C# in this case with .net framework).
+This is mainly developed for [Nano. Slider](https://www.keebwerk.com/nano-slider/), but it coul be fairly easily ported to any Midi based potentiometer. 
+It is written only for Windows®([Linux Version](https://github.com/jesusvallejo/Midi2Vol-Linux)).
 
 The app lives in the tray in order to be less intrusive.
 
-This version has per app volume control(Windows mixer, could be Spotify , Google Chrome) as well as current device volume control(Earphones,Speakers), it can be configured via the config menu button or editing config.json,to add/edit more apps.(config.json is under \user\AppData\midi2vol, it is recomended to use the menu configurator to avoid parsing errors)
+This version has per app volume control(Windows mixer, could be Spotify , Google Chrome) as well as current device volume control(Earphones,Speakers), it can be configured via the config menu button or editing config.json,to add/edit more apps.(config.json is under ```\user\AppData\midi2vol```, it is recomended to use the menu configurator to avoid parsing errors).
 
 In order to make it work you will need to add some code to your keymap,or pehaps use the one i provide here: https://github.com/jesusvallejo/nanokeymaps/
 
