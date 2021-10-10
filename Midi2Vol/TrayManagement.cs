@@ -21,6 +21,14 @@ namespace Midi2Vol
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
         }
+
+
+        public void appVolume(App app) {
+            _trayIcon.BalloonTipText = app.name + " volume is now controlled";
+            _trayIcon.BalloonTipTitle = "Midi2Vol";
+            _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
+            _trayIcon.ShowBalloonTip(0);
+        }
         /*
          * Edits already instanciated trayIcon icon and launches notification.
          */

@@ -16,13 +16,20 @@ using System.Collections.Generic;
 
 namespace Midi2Vol
 {
+
     public class MidiSlider
     {
         private MidiIn midiIn;
         private int nanoID = -1;
         private int contVal = -1; // controller value to change different programs volume
+        private int oldContVal = -1;
         private int potVal = -1;// potentiometer resistence value
         private int oldPotVal = -1; // value to check with the old value
+        SimpleAudioVolume appEnd = null; // current app audio source
+        private const int defaultOutputSink = 62;
+        private const int  defaultInputSink = 63;
+
+
         bool showed = false;
         private List<App> apps;
         TrayApplicationContext nanoSliderTray;
@@ -47,19 +54,32 @@ namespace Midi2Vol
                 {
                     while (true)
                     {
+                        if (contVal != oldContVal) {
+                            // update audio Source
+                            appEnd =  getProcessAudioEndpoint(enumerator);
+                            oldContVal = contVal;
+                            // notify editing volume on another app
+                            nanoSliderTray.appVolume(getApp());
+
+                        }
                         if (potVal != oldPotVal && (potVal > oldPotVal + 1 || potVal < oldPotVal - 1)) // prevents ghost slides
                         {
                             oldPotVal = potVal;
                             volume = (float)(Math.Floor((potVal / 3 * 2.395)) / 100);
-                            if (contVal == 62)
+                            if (contVal == defaultOutputSink )
                             {
-                                ChangeAllVolume(volume, enumerator);
+                                ChangeOutputVolume(volume, enumerator);
+                            }
+                            else if (contVal == defaultInputSink)
+                            {
+                                ChangeInputVolume(volume, enumerator);
                             }
                             else
                             {
-                                ChangeAppVolume(volume, enumerator);
+                                ChangeAppVolume(volume);
                             }
                         }
+                        
                         if (nanoID == -1)
                         {
                             // if nano undetected poll slower
@@ -82,7 +102,7 @@ namespace Midi2Vol
         }
 
 
-        void ChangeAllVolume(float volume, MMDeviceEnumerator enumerator)
+        void ChangeOutputVolume(float volume, MMDeviceEnumerator enumerator)
         {
             using (var device = enumerator.GetDefaultAudioEndpoint(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.Role.Multimedia))
             using (var endpointVolume = CSCore.CoreAudioAPI.AudioEndpointVolume.FromDevice(device))
@@ -91,8 +111,40 @@ namespace Midi2Vol
             }
         }
 
-        void ChangeAppVolume(float volume, MMDeviceEnumerator enumerator)
+
+        void ChangeInputVolume(float volume, MMDeviceEnumerator enumerator)
         {
+            using (var device = enumerator.GetDefaultAudioEndpoint(CSCore.CoreAudioAPI.DataFlow.Capture, CSCore.CoreAudioAPI.Role.Multimedia))
+            using (var endpointVolume = CSCore.CoreAudioAPI.AudioEndpointVolume.FromDevice(device))
+            {
+                endpointVolume.SetMasterVolumeLevelScalar(volume, Guid.Empty);
+            }
+        }
+
+        App getApp() {
+            foreach (var app in apps)  // mb change this with find or smt
+            {
+                if (app.AppRaw != null)
+                {
+                    int num;
+                    if (app.AppRaw.StartsWith("0x"))
+                    {
+                        num = Int32.Parse(app.AppRaw.Substring(2), System.Globalization.NumberStyles.HexNumber);
+                    }
+                    else
+                    {
+                        num = Int32.Parse(app.AppRaw, System.Globalization.NumberStyles.HexNumber);
+                    }
+                    if (num == contVal)
+                    {
+                        return app;
+                    }
+                }
+            }
+            return null; 
+        }
+
+        SimpleAudioVolume getProcessAudioEndpoint(MMDeviceEnumerator enumerator) {
             using (var sessionManager = GetDefaultAudioSessionManager2(enumerator, CSCore.CoreAudioAPI.DataFlow.Render))
             using (var device = enumerator.EnumAudioEndpoints(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.DeviceState.Active))
             {
@@ -100,38 +152,29 @@ namespace Midi2Vol
                 {
                     foreach (var session in sessionEnumerator)
                     {
-                        using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName doesnt work with a lot of applications
+                        using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName doesnt work with many applications
                         using (var simpleVolume = session.QueryInterface<CSCore.CoreAudioAPI.SimpleAudioVolume>())
                         {
                             String name = Process.GetProcessById(session2.ProcessID).ProcessName;
-                            String target = null;
-                            foreach (var app in apps)  // mb change this with find or smt
-                            {
-                                if (app.AppRaw != null)
-                                {
-                                    int num;
-                                    if (app.AppRaw.StartsWith("0x"))
-                                    {
-                                        num = Int32.Parse(app.AppRaw.Substring(2), System.Globalization.NumberStyles.HexNumber);
-                                    }
-                                    else
-                                    {
-                                        num = Int32.Parse(app.AppRaw, System.Globalization.NumberStyles.HexNumber);
-                                    }
-                                    if (num == contVal)
-                                    {
-                                        target = app.ProcessName;
-                                    }
-                                }
-                            }
+                            String target = getApp().ProcessName;
                             if (name == target && target != null)
                             {
-                                simpleVolume.MasterVolume = volume;
+                                return new SimpleAudioVolume(simpleVolume.BasePtr);
                             }
                         }
                     }
+                    return null;
                 }
             }
+            
+        }
+
+
+        void ChangeAppVolume(float volume) // refactor to cache the current app and offload the process
+        {
+           if (appEnd != null) {
+                appEnd.MasterVolume = volume;
+            }           
         }
 
         private CSCore.CoreAudioAPI.AudioSessionManager2 GetDefaultAudioSessionManager2(CSCore.CoreAudioAPI.MMDeviceEnumerator enumerator, CSCore.CoreAudioAPI.DataFlow dataFlow)
