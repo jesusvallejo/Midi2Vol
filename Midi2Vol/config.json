@@ -1,22 +1,5 @@
-[
-  {
-    "name": "Default",
-    "AppRaw": "0x3E",
-    "ProcessName": "default"
-  },
-  {
-    "name": "Spotify",
-    "AppRaw": "0x3F",
-    "ProcessName": "Spotify"
-  },
-  {
-    "name": "Discord",
-    "AppRaw": "0x40",
-    "ProcessName": "Discord"
-  },
-  {
-    "name": "Google Chrome",
-    "AppRaw": "0x41",
-    "ProcessName": "chrome"
-  }
-]
+{
+  "bootStartup": "false",
+  "NotifyStartUp": "false",
+  "NotifyApp": "false"
+}

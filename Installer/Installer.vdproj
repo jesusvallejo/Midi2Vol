@@ -4,9 +4,9 @@
 "ProjectType" = "8:{978C614F-708E-4E1A-B201-565925725DBA}"
 "IsWebType" = "8:FALSE"
 "ProjectName" = "8:Installer"
-"LanguageId" = "3:3082"
+"LanguageId" = "3:1033"
 "CodePage" = "3:1252"
-"UILanguageId" = "3:3082"
+"UILanguageId" = "3:1033"
 "SccProjectName" = "8:"
 "SccLocalPath" = "8:"
 "SccAuxPath" = "8:"
@@ -30,6 +30,12 @@
         {
         "MsmKey" = "8:_39EAAB194E29AAAB94EECD5633839DF0"
         "OwnerKey" = "8:_AA645C8A4203D66EEEDD6308BAB1CD30"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4C5567F6CFC14F89B7CD61A9A45EABE0"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,6 +94,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_AE90ABDC52134E9EB82D560D2375924A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_AEAB1787A9A5EFD5B5B3D8C8A12FA037"
         "OwnerKey" = "8:_8FEFD650C071DFDE60ECF3E3B51A4FB2"
         "MsmSig" = "8:_UNDEFINED"
@@ -96,12 +108,6 @@
         {
         "MsmKey" = "8:_AECB332D751AA4CA095B8FC4700C31D1"
         "OwnerKey" = "8:_6AAED68AB6F8427197942AD26529EBD3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B1892ED2286D4817BF9BD3623476F0BE"
-        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -363,6 +369,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4C5567F6CFC14F89B7CD61A9A45EABE0"
+            {
+            "SourcePath" = "8:..\\Midi2Vol\\config.json"
+            "TargetName" = "8:config.json"
+            "Tag" = "8:"
+            "Folder" = "8:_D9391AD0940E4D038ADF716CCEFB7E12"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7FE13205D7A59047210FABC887931AB3"
             {
             "AssemblyRegister" = "3:1"
@@ -518,6 +544,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AE90ABDC52134E9EB82D560D2375924A"
+            {
+            "SourcePath" = "8:..\\Midi2Vol\\appConfig.json"
+            "TargetName" = "8:appConfig.json"
+            "Tag" = "8:"
+            "Folder" = "8:_D9391AD0940E4D038ADF716CCEFB7E12"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AEAB1787A9A5EFD5B5B3D8C8A12FA037"
             {
             "AssemblyRegister" = "3:1"
@@ -578,26 +624,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B1892ED2286D4817BF9BD3623476F0BE"
-            {
-            "SourcePath" = "8:..\\Midi2Vol\\config.json"
-            "TargetName" = "8:config.json"
-            "Tag" = "8:"
-            "Folder" = "8:_D9391AD0940E4D038ADF716CCEFB7E12"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:TRUE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C71A79F0BAC92E5526A7E4107233479B"
@@ -752,7 +778,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_2686C8E45C094D4CA4808C3DC500CF96"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -815,22 +841,22 @@
         }
         "MsiBootstrapper"
         {
-        "LangId" = "3:3082"
+        "LangId" = "3:1033"
         "RequiresElevation" = "11:FALSE"
         }
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Midi2Vol"
-        "ProductCode" = "8:{F0BFAE67-1EF7-40F9-B671-2955BE3581B5}"
-        "PackageCode" = "8:{3BD4AE78-CD82-45F4-AD28-07046FDA7428}"
+        "ProductCode" = "8:{3C7BA210-80C4-4B1F-9341-E124077293F0}"
+        "PackageCode" = "8:{C5291F75-6F1E-4F9F-85EE-5F297F7DE3DB}"
         "UpgradeCode" = "8:{BC007B71-46FE-4F85-92C0-F0CCCD9ED5CD}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.0.8"
+        "InstallAllUsers" = "11:FALSE"
+        "ProductVersion" = "8:0.1"
         "Manufacturer" = "8:JVCSoft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:https://github.com/jesusvallejo/Midi2Vol"
@@ -844,7 +870,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"

@@ -8,20 +8,49 @@ namespace Midi2Vol
 {
     public class TrayApplicationContext : ApplicationContext
     {
-         NotifyIcon _trayIcon = new NotifyIcon();
-         public List<App> apps;
-        public TrayApplicationContext()
+        NotifyIcon _trayIcon = new NotifyIcon();
+        public List<App> apps;
+        public Sett settings;
+        private MenuItem appConfig;
+        private MenuItem noti;
+        private MenuItem runStartup;
+        private MenuItem exit;
+
+        public TrayApplicationContext(Sett settings)
         {
+            this.settings = settings;
             ContextMenu _trayMenu = new ContextMenu { };
             _trayIcon.Icon = Properties.Resources.NanoSlider;
             _trayIcon.Text = "Midi2Vol";
-            _trayMenu.MenuItems.Add("Config", configClick);
-            _trayMenu.MenuItems.Add("Add/Remove Run on StartUp", startupClick);
-            _trayMenu.MenuItems.Add("E&xit", ExitClick);
+            appConfig = _trayMenu.MenuItems.Add("App Config", configClick);
+            noti = _trayMenu.MenuItems.Add("Notify", notif);
+            if (settings.notifyApp) {
+                noti.Checked = true;
+            }
+            runStartup =_trayMenu.MenuItems.Add("Run on StartUp", startupClick);
+            if (settings.bootStartUp)
+            {
+                runStartup.Checked = true;
+            }
+            exit = _trayMenu.MenuItems.Add("Exit", ExitClick);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
         }
 
+        private void notif(object sender, EventArgs e)
+        {
+            if (noti.Checked)
+            {
+                noti.Checked = false;
+                settings.notifyApp = false;
+            }
+            else 
+            {
+                noti.Checked = true;
+                settings.notifyApp = true;
+            }
+            //throw new NotImplementedException();
+        }
 
         public void appVolume(App app) {
             _trayIcon.BalloonTipText = app.name + " volume is now controlled";
@@ -72,16 +101,12 @@ namespace Midi2Vol
             return true;
         }
 
-        public bool ProgramAlreadyRuning()
+        public void ProgramAlreadyRuning()
         {
-            if (StartUp.RunningInstance() != null)//check is not already running before start
-            {
                 const string message = "Midi2Vol is already runing.";
                 const string caption = "Midi2Vol";
                 MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ExitProgram();
-            }
-            return false;
         }
         public void midiAlredyInUse()// 
         {
@@ -99,7 +124,7 @@ namespace Midi2Vol
         }
          private void configClick(object sender, EventArgs e) {
             Config config = new Config(); 
-            apps = config.SourceConfig();
+            apps = config.SourceAppConfig();
             Edit edit = new Edit(apps);
             edit.Show();
             edit.FormClosed += new FormClosedEventHandler(edit_FormClosed) ;
@@ -107,18 +132,14 @@ namespace Midi2Vol
 
          void edit_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
-            //string message = "Saving information, relaunching Midi2Vol";
-            //string caption = "Midi2Vol";
-            //MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
             Config config = new Config();
-            config.saveConfig(apps);
+            config.saveAppConfig(apps);
             Application.Restart();
             Environment.Exit(0);
         }
 
 
-        static private void startupClick(object sender, EventArgs e)
+         private void startupClick(object sender, EventArgs e)
         {
             StartUp start = new StartUp();
             string Path = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
@@ -126,15 +147,20 @@ namespace Midi2Vol
             Debug.WriteLine(shortcutfile);
             if (!File.Exists(shortcutfile))
             {
+                runStartup.Checked = true;
+                settings.bootStartUp = true;
                 start.CreateStartupFolderShortcut();
                 MessageBox.Show("Now " + Application.ProductName + " will launch on StartUp.");
             }
             else
             {
+                runStartup.Checked = false;
+                settings.bootStartUp = false;
                 start.DeleteStartupFolderShortcuts(Application.ProductName);
                 MessageBox.Show("Now " + Application.ProductName + " will not launch on StartUp.");
             }
         }
+
         private void ExitClick(object sender, EventArgs e)
         {
             ExitProgram();

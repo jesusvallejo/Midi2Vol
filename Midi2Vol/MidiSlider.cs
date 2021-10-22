@@ -3,8 +3,7 @@ using NAudio.Midi;
 using System;
 using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 using CSCore.CoreAudioAPI;
 using System.Collections.Generic;
 
@@ -25,27 +24,22 @@ namespace Midi2Vol
         private int oldContVal = -1;
         private int potVal = -1;// potentiometer resistence value
         private int oldPotVal = -1; // value to check with the old value
-        SimpleAudioVolume appEnd = null; // current app audio source
+        private SimpleAudioVolume appEnd = null; // current app audio source
         private const int defaultOutputSink = 62;
         private const int  defaultInputSink = 63;
-
-
         bool showed = false;
         private List<App> apps;
+        private Sett settings;
         TrayApplicationContext nanoSliderTray;
-        public MidiSlider(List<App> apps)
+        public MidiSlider(Sett settings, List<App> apps, TrayApplicationContext nanoSliderTray)
         {
+            this.settings = settings;
             this.apps = apps;
-            nanoSliderTray = new TrayApplicationContext();
-            if (!nanoSliderTray.ProgramAlreadyRuning())
-            {
-                Task.Run(() => Slider());
-                Application.Run(nanoSliderTray);//run everything before this line or wont be runned
-            }
+            this.nanoSliderTray = nanoSliderTray;
         }
 
 
-        private void Slider()
+        public void Slider()
         {
             try
             {
@@ -54,13 +48,18 @@ namespace Midi2Vol
                 {
                     while (true)
                     {
-                        if (contVal != oldContVal) {
-                            // update audio Source
-                            appEnd =  getProcessAudioEndpoint(enumerator);
-                            oldContVal = contVal;
-                            // notify editing volume on another app
-                            nanoSliderTray.appVolume(getApp());
 
+                        if (contVal != oldContVal) {
+                            // update value
+                            oldContVal = contVal;
+                            if (appEnd != null) {
+                                appEnd.Dispose();
+                            }
+                            appEnd = getProcessAudioEndpoint(enumerator);
+                            // notify editing volume on another app
+                            if (settings.notifyApp) { 
+                                nanoSliderTray.appVolume(getApp());
+                            }
                         }
                         if (potVal != oldPotVal && (potVal > oldPotVal + 1 || potVal < oldPotVal - 1)) // prevents ghost slides
                         {
@@ -79,7 +78,6 @@ namespace Midi2Vol
                                 ChangeAppVolume(volume);
                             }
                         }
-                        
                         if (nanoID == -1)
                         {
                             // if nano undetected poll slower
@@ -94,9 +92,9 @@ namespace Midi2Vol
                     }
                 }
             }
-            catch (NullReferenceException e)
+            catch (Exception k)
             {
-                Debug.WriteLine(e.StackTrace);
+                Console.WriteLine(k);
             }
 
         }
@@ -144,37 +142,39 @@ namespace Midi2Vol
             return null; 
         }
 
-        SimpleAudioVolume getProcessAudioEndpoint(MMDeviceEnumerator enumerator) {
+       
+         
+        SimpleAudioVolume  getProcessAudioEndpoint(MMDeviceEnumerator enumerator) {
+            String target = getApp().ProcessName;
+            Process process;
             using (var sessionManager = GetDefaultAudioSessionManager2(enumerator, CSCore.CoreAudioAPI.DataFlow.Render))
-            using (var device = enumerator.EnumAudioEndpoints(CSCore.CoreAudioAPI.DataFlow.Render, CSCore.CoreAudioAPI.DeviceState.Active))
             {
                 using (var sessionEnumerator = sessionManager.GetSessionEnumerator())
                 {
                     foreach (var session in sessionEnumerator)
                     {
-                        using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName doesnt work with many applications
-                        using (var simpleVolume = session.QueryInterface<CSCore.CoreAudioAPI.SimpleAudioVolume>())
+                        using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName doesnt work with many 
                         {
-                            String name = Process.GetProcessById(session2.ProcessID).ProcessName;
-                            String target = getApp().ProcessName;
-                            if (name == target && target != null)
+                            process = Process.GetProcessById(session2.ProcessID);
+                            if (process.ProcessName == target && target != null)
                             {
-                                return new SimpleAudioVolume(simpleVolume.BasePtr);
+                                return session.QueryInterface<SimpleAudioVolume>();
                             }
                         }
                     }
+                    Console.WriteLine("app not found: "+ target);
                     return null;
                 }
             }
-            
         }
-
+        
 
         void ChangeAppVolume(float volume) // refactor to cache the current app and offload the process
         {
-           if (appEnd != null) {
+            if (appEnd != null) {
                 appEnd.MasterVolume = volume;
-            }           
+            }
+
         }
 
         private CSCore.CoreAudioAPI.AudioSessionManager2 GetDefaultAudioSessionManager2(CSCore.CoreAudioAPI.MMDeviceEnumerator enumerator, CSCore.CoreAudioAPI.DataFlow dataFlow)
@@ -219,7 +219,10 @@ namespace Midi2Vol
                         midiIn.MessageReceived += MidiIn_MessageReceived;
                         SystemEvents.PowerModeChanged += OnPowerChange;
                         midiIn.Start();
-                        nanoSliderTray.Ready();
+                        if (settings.notifyStartUp)
+                        {
+                            nanoSliderTray.Ready();
+                        }
                     }
                     showed = false;
                     return nanoID;

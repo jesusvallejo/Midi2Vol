@@ -37,22 +37,6 @@ namespace Midi2Vol
             }
         }
 
-        public static Process RunningInstance()
-        {
-            Process current = Process.GetCurrentProcess();
-            Process[] processes = Process.GetProcessesByName(current.ProcessName);
-            //Loop through the running processes in with the same name 
-            foreach (Process process in processes)
-            {
-                //Ignore the current process 
-                if (process.Id != current.Id)
-                {
-                    //Return the other process instance.  
-                    return process;
-                }
-            }
-            //No other instance was found, return null.  
-            return null;
-        }
+       
     }
 }

@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Default",
+    "AppRaw": "0x3E",
+    "ProcessName": "default"
+  },
+  {
+    "name": "Microphone",
+    "AppRaw": "0x3F",
+    "ProcessName": "Microphone"
+  },
+  {
+    "name": "Spotify",
+    "AppRaw": "0x40",
+    "ProcessName": "Spotify"
+  },
+  {
+    "name": "Discord",
+    "AppRaw": "0x41",
+    "ProcessName": "Discord"
+  },
+  {
+    "name": "Google Chrome",
+    "AppRaw": "0x42",
+    "ProcessName": "chrome"
+  }
+]

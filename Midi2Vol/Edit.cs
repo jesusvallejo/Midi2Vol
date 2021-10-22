@@ -86,5 +86,29 @@ namespace Midi2Vol
         {
             return save;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listBox1.ClearSelected();
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
