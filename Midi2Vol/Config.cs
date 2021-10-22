@@ -96,7 +96,7 @@ class Config
         }
 
 
-        public void saveAppConfig(Sett settings)
+        public void saveConfig(Sett settings)
         {
             String objectJson = JsonConvert.SerializeObject(settings);
             FileAttributes fileAttributes = File.GetAttributes(configFile);

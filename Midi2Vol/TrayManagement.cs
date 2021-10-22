@@ -83,6 +83,8 @@ namespace Midi2Vol
         }
         private void ExitProgram()
         {
+            Config configs = new Config();
+            configs.saveConfig(settings);
             Application.Exit();           // closed everything
             Environment.Exit(1);         // Kaboom!
         }
@@ -147,17 +149,23 @@ namespace Midi2Vol
             Debug.WriteLine(shortcutfile);
             if (!File.Exists(shortcutfile))
             {
-                runStartup.Checked = true;
-                settings.bootStartUp = true;
-                start.CreateStartupFolderShortcut();
-                MessageBox.Show("Now " + Application.ProductName + " will launch on StartUp.");
+                if (!runStartup.Checked)
+                {
+                    runStartup.Checked = true;
+                    settings.bootStartUp = true;
+                    start.CreateStartupFolderShortcut();
+                    MessageBox.Show("Now " + Application.ProductName + " will launch on StartUp.");
+                }
             }
             else
             {
-                runStartup.Checked = false;
-                settings.bootStartUp = false;
-                start.DeleteStartupFolderShortcuts(Application.ProductName);
-                MessageBox.Show("Now " + Application.ProductName + " will not launch on StartUp.");
+                if (runStartup.Checked)
+                {
+                    runStartup.Checked = false;
+                    settings.bootStartUp = false;
+                    start.DeleteStartupFolderShortcuts(Application.ProductName);
+                    MessageBox.Show("Now " + Application.ProductName + " will not launch on StartUp.");
+                }
             }
         }
 
