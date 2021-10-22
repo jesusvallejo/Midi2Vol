@@ -156,6 +156,10 @@ namespace Midi2Vol
                     start.CreateStartupFolderShortcut();
                     MessageBox.Show("Now " + Application.ProductName + " will launch on StartUp.");
                 }
+                else {
+                    runStartup.Checked = false;
+                    settings.bootStartUp = false;
+                }
             }
             else
             {
@@ -165,6 +169,10 @@ namespace Midi2Vol
                     settings.bootStartUp = false;
                     start.DeleteStartupFolderShortcuts(Application.ProductName);
                     MessageBox.Show("Now " + Application.ProductName + " will not launch on StartUp.");
+                }
+                else {
+                    runStartup.Checked = true;
+                    settings.bootStartUp = true;
                 }
             }
         }
