@@ -44,7 +44,7 @@ class Config
 
         private String configDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Midi2Vol";
         private String configFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Midi2Vol\\config.json";
-        private String defaultConfig = "{\"Startup\": \"false\",\"NotifyStartUp\": \"false\",\"NotifyApp\": \"false\"}";
+        private String defaultConfig = "{\"Startup\": \"false\",\"NotifyStatus\": \"false\",\"NotifyApp\": \"false\"}";
 
 
         public Config() { 

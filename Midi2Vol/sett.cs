@@ -12,14 +12,14 @@ namespace Midi2Vol
     {
 
         public Sett() { }
-        public Sett(bool bootStartUp, bool notifyStartUp, bool notifyApp)
+        public Sett(bool bootStartUp, bool notifyStatus, bool notifyApp)
         {
             this.bootStartUp = bootStartUp;
-            this.notifyStartUp = notifyStartUp;
+            this.notifyStatus = notifyStatus;
             this.notifyApp = notifyApp;
         }
         public bool bootStartUp { get; set; }
-        public bool notifyStartUp { get; set; }
+        public bool notifyStatus { get; set; }
         public bool notifyApp { get; set; }
     }
 

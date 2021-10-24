@@ -13,6 +13,7 @@ namespace Midi2Vol
         public Sett settings;
         private MenuItem appConfig;
         private MenuItem noti;
+        private MenuItem notifyStatus;
         private MenuItem runStartup;
         private MenuItem exit;
 
@@ -32,9 +33,28 @@ namespace Midi2Vol
             {
                 runStartup.Checked = true;
             }
+            notifyStatus = _trayMenu.MenuItems.Add("Notify Status", notifS);
+            if (settings.notifyStatus)
+            {
+                notifyStatus.Checked = true;
+            }
             exit = _trayMenu.MenuItems.Add("Exit", ExitClick);
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
+        }
+
+        private void notifS(object sender, EventArgs e)
+        {
+            if (notifyStatus.Checked)
+            {
+                notifyStatus.Checked = false;
+                settings.notifyStatus = false;
+            }
+            else
+            {
+                notifyStatus.Checked = true;
+                settings.notifyStatus = true;
+            }   
         }
 
         private void notif(object sender, EventArgs e)
@@ -49,7 +69,6 @@ namespace Midi2Vol
                 noti.Checked = true;
                 settings.notifyApp = true;
             }
-            //throw new NotImplementedException();
         }
 
         public void appVolume(App app) {
@@ -66,20 +85,27 @@ namespace Midi2Vol
             _trayIcon.Visible = false;//to avoid showing two icons in the traybar
             _trayIcon.Icon = Properties.Resources.NanoSlider;
             _trayIcon.Visible = true;//to avoid showing two icons in the traybar
+        }
+        public void ReadyBaloon()
+        {
             _trayIcon.BalloonTipText = "Midi2Vol is now ready.";
             _trayIcon.BalloonTipTitle = "Midi2Vol";
             _trayIcon.BalloonTipIcon = ToolTipIcon.Info;
             _trayIcon.ShowBalloonTip(0);
         }
+
         public void notReady()
         {
             _trayIcon.Visible = false;//to avoid showing two icons in the traybar
             _trayIcon.Icon = Properties.Resources.NanoSliderDis;
             _trayIcon.Visible = true;//to avoid showing two icons in the traybar
+        }
+        public void notReadyBaloon()
+        {
             _trayIcon.BalloonTipText = "Midi2Vol is not connected.";
             _trayIcon.BalloonTipTitle = "Midi2Vol";
             _trayIcon.BalloonTipIcon = ToolTipIcon.Error;
-            _trayIcon.ShowBalloonTip(250);
+            _trayIcon.ShowBalloonTip(0);
         }
         private void ExitProgram()
         {
@@ -99,6 +125,10 @@ namespace Midi2Vol
             if (showed == false)
             {
                 notReady();
+                if (settings.notifyStatus)
+                {
+                    notReadyBaloon();
+                }
             }
             return true;
         }

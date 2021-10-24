@@ -219,9 +219,10 @@ namespace Midi2Vol
                         midiIn.MessageReceived += MidiIn_MessageReceived;
                         SystemEvents.PowerModeChanged += OnPowerChange;
                         midiIn.Start();
-                        if (settings.notifyStartUp)
+                        nanoSliderTray.Ready();
+                        if (settings.notifyStatus)
                         {
-                            nanoSliderTray.Ready();
+                            nanoSliderTray.ReadyBaloon();
                         }
                     }
                     showed = false;

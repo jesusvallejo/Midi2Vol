@@ -1,5 +1,5 @@
 {
   "bootStartup": "false",
-  "NotifyStartUp": "false",
+  "NotifyStatus": "false",
   "NotifyApp": "false"
 }
