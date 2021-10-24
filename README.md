@@ -24,6 +24,8 @@ Remember to use different hex values. Default volume value is: ```0x3E```.
 
 I'll provide [binary files](https://github.com/jesusvallejo/Midi2Vol/releases) but i recommend you to compile it by yourself.Binaries are unsigned as the certificate costs money per year.
 
+Check [KeebWerk Support](https://www.keebwerk.com/support) for an in depth installation and use guide.
+
 It is provided as is, and it comes with no guarantee.(see [Licence](https://raw.githubusercontent.com/jesusvallejo/Midi2Vol/master/LICENSE))
 
 Nevertheless any change, update or upgrade is welcomed.
