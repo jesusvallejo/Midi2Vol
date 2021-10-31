@@ -1,5 +1,6 @@
 {
   "bootStartup": "false",
   "NotifyStatus": "false",
-  "NotifyApp": "false"
+  "NotifyApp": "false",
+  "trayBarIcon": "Default"
 }

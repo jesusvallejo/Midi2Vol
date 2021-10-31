@@ -156,10 +156,11 @@ namespace Midi2Vol
                         using (var session2 = session.QueryInterface<AudioSessionControl2>()) // get process ID , getName doesnt work with many 
                         {
                             process = Process.GetProcessById(session2.ProcessID);
-                            if (process.ProcessName == target && target != null)
-                            {
-                                return session.QueryInterface<SimpleAudioVolume>();
-                            }
+                            Debug.WriteLine(process);
+                            //if (process.ProcessName == target && target != null)
+                           // {
+                            //    return session.QueryInterface<SimpleAudioVolume>();
+                            //}
                         }
                     }
                     Console.WriteLine("app not found: "+ target);

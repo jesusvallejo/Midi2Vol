@@ -12,15 +12,19 @@ namespace Midi2Vol
     {
 
         public Sett() { }
-        public Sett(bool bootStartUp, bool notifyStatus, bool notifyApp)
+        public Sett(bool bootStartUp, bool notifyStatus, bool notifyApp, String trayBarIcon )
         {
             this.bootStartUp = bootStartUp;
             this.notifyStatus = notifyStatus;
             this.notifyApp = notifyApp;
+            this.trayBarIcon = trayBarIcon;
         }
         public bool bootStartUp { get; set; }
         public bool notifyStatus { get; set; }
         public bool notifyApp { get; set; }
+        public String trayBarIcon { get; set; }
+
+
     }
 
 

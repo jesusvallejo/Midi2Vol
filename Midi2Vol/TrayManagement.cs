@@ -15,6 +15,11 @@ namespace Midi2Vol
         private MenuItem noti;
         private MenuItem notifyStatus;
         private MenuItem runStartup;
+        private MenuItem icon;
+        private MenuItem iconSlider;
+        private MenuItem iconBento;
+        private MenuItem iconWavez;
+        private MenuItem iconMizu;
         private MenuItem exit;
 
         public TrayApplicationContext(Sett settings)
@@ -38,9 +43,85 @@ namespace Midi2Vol
             {
                 notifyStatus.Checked = true;
             }
+
+            icon = _trayMenu.MenuItems.Add("Icon");
             exit = _trayMenu.MenuItems.Add("Exit", ExitClick);
+
+
+            // icon submenu 
+            iconSlider = icon.MenuItems.Add("Default",clickSlider);
+            iconBento = icon.MenuItems.Add("NanoBento",clickBento);
+            iconWavez = icon.MenuItems.Add("NanoWavez",clickWavez);
+            iconMizu = icon.MenuItems.Add("NanoMizu",clickMizu);
+
+            switch (settings.trayBarIcon)
+            {
+                case "NanoSlider":
+                    iconSlider.Checked = true;
+                    break;
+                case "NanoBento":
+                    iconBento.Checked = true;
+                    break;
+                case "NanoWavez":
+                   iconWavez.Checked = true;
+                    break;
+                case "NanoMizu":
+                    iconMizu.Checked = true;
+                    break;
+                default:
+                    iconSlider.Checked = true;
+                    break;
+            }
+
             _trayIcon.ContextMenu = _trayMenu;
             _trayIcon.Visible = true;
+        }
+
+        private void clickMizu(object sender, EventArgs e)
+        {
+
+            iconWavez.Checked = false;
+            iconBento.Checked = false;
+            iconSlider.Checked = false;
+            iconMizu.Checked = true;
+            settings.trayBarIcon = "NanoMizu";
+            Ready();
+
+        }
+
+        private void clickWavez(object sender, EventArgs e)
+        {
+
+            
+            iconBento.Checked = false;
+            iconSlider.Checked = false;
+            iconMizu.Checked = false;
+            iconWavez.Checked = true;
+            settings.trayBarIcon = "NanoWavez";
+            Ready();
+        }
+
+        private void clickBento(object sender, EventArgs e)
+        {
+
+            iconWavez.Checked = false;
+            iconSlider.Checked = false;
+            iconMizu.Checked = false;
+            iconBento.Checked = true;
+            settings.trayBarIcon = "NanoBento";
+            Ready();
+        }
+
+        private void clickSlider(object sender, EventArgs e)
+        {
+
+            iconWavez.Checked = false;
+            iconBento.Checked = false;
+            iconSlider.Checked = true;
+            iconMizu.Checked = false;
+            settings.trayBarIcon = "NanoSlider";
+            Ready();
+             
         }
 
         private void notifS(object sender, EventArgs e)
@@ -71,6 +152,37 @@ namespace Midi2Vol
             }
         }
 
+        public System.Drawing.Icon [] GetIcon(String trayBarIcon)
+        {
+            System.Drawing.Icon [] icon= new System.Drawing.Icon[2];
+            switch (trayBarIcon)
+            {
+                case "NanoSlider":
+                    icon[0] = Properties.Resources.NanoSlider;
+                    icon[1] = Properties.Resources.NanoSliderDis;
+                    break;
+                case "NanoBento":
+                    icon[0] = Properties.Resources.NanoBento;
+                    icon[1] = Properties.Resources.NanoBentoDis;
+                    break;
+                case "NanoWavez":
+                    icon[0] = Properties.Resources.NanoWavez;
+                    icon[1] = Properties.Resources.NanoWavezDis;
+                    break;
+                case "NanoMizu":
+                    icon[0] = Properties.Resources.NanoMizu;
+                    icon[1] = Properties.Resources.NanoMizuDis;
+                    break;
+                default:
+                    icon[0] = Properties.Resources.NanoSlider;
+                    icon[1] = Properties.Resources.NanoSliderDis;
+                    break;
+            }
+
+            return icon;
+        }
+
+
         public void appVolume(App app) {
             _trayIcon.BalloonTipText = app.name + " volume is now controlled";
             _trayIcon.BalloonTipTitle = "Midi2Vol";
@@ -83,7 +195,7 @@ namespace Midi2Vol
         public void Ready()
         {
             _trayIcon.Visible = false;//to avoid showing two icons in the traybar
-            _trayIcon.Icon = Properties.Resources.NanoSlider;
+            _trayIcon.Icon = GetIcon(settings.trayBarIcon)[0];
             _trayIcon.Visible = true;//to avoid showing two icons in the traybar
         }
         public void ReadyBaloon()
@@ -97,7 +209,7 @@ namespace Midi2Vol
         public void notReady()
         {
             _trayIcon.Visible = false;//to avoid showing two icons in the traybar
-            _trayIcon.Icon = Properties.Resources.NanoSliderDis;
+            _trayIcon.Icon = GetIcon(settings.trayBarIcon)[1];
             _trayIcon.Visible = true;//to avoid showing two icons in the traybar
         }
         public void notReadyBaloon()

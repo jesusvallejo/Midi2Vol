@@ -124,16 +124,25 @@
   <data name="NanoBento" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NanoBento.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="NanoBentoDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NanoBentoDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NanoMizu" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NanoMizu.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NanoMizuDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NanoMizuDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="NanoSlider" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NanoSlider.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="NanoSliderDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NanoSliderDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="NanoWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NanoWavez" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NanoWavez.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="p" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\p.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="NanoWavezDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\NanoWavezDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

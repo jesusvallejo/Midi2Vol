@@ -218,10 +218,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NanoSlider.ico" />
-    <None Include="Resources\p.ico" />
-    <None Include="Resources\p.bmp" />
-    <None Include="Resources\white.ico" />
-    <None Include="Resources\NanoWhite.ico" />
+    <None Include="Resources\NanoWavezDis.ico" />
+    <None Include="Resources\NanoWavez.ico" />
+    <None Include="Resources\NanoMizuDis.ico" />
+    <None Include="Resources\NanoMizu.ico" />
+    <None Include="Resources\NanoBentoDis.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

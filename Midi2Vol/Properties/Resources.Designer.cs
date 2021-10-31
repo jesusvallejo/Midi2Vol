@@ -83,6 +83,36 @@ namespace Midi2Vol.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
+        public static System.Drawing.Icon NanoBentoDis {
+            get {
+                object obj = ResourceManager.GetObject("NanoBentoDis", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        public static System.Drawing.Icon NanoMizu {
+            get {
+                object obj = ResourceManager.GetObject("NanoMizu", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
+        public static System.Drawing.Icon NanoMizuDis {
+            get {
+                object obj = ResourceManager.GetObject("NanoMizuDis", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
+        /// </summary>
         public static System.Drawing.Icon NanoSlider {
             get {
                 object obj = ResourceManager.GetObject("NanoSlider", resourceCulture);
@@ -103,9 +133,9 @@ namespace Midi2Vol.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
-        public static System.Drawing.Icon NanoWhite {
+        public static System.Drawing.Icon NanoWavez {
             get {
-                object obj = ResourceManager.GetObject("NanoWhite", resourceCulture);
+                object obj = ResourceManager.GetObject("NanoWavez", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
@@ -113,9 +143,9 @@ namespace Midi2Vol.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Icon similar a (Icono).
         /// </summary>
-        public static System.Drawing.Icon p {
+        public static System.Drawing.Icon NanoWavezDis {
             get {
-                object obj = ResourceManager.GetObject("p", resourceCulture);
+                object obj = ResourceManager.GetObject("NanoWavezDis", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
