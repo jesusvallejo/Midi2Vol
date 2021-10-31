@@ -40,6 +40,5 @@ Volume handling:
 
 TODO
 - [ ] Check wether the AppRaw input in config menu is an hex.
-- [ ] Make it easier for user to change app icons.(not sure if possible)
 - [ ] Check .json parsing errors
 
