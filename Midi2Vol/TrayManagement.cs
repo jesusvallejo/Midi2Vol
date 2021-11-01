@@ -384,6 +384,7 @@ namespace Midi2Vol
         {
             Config config = new Config();
             config.saveAppConfig(apps);
+            config.saveConfig(settings);
             _trayIcon.Visible = false;
             Application.Restart();
             Environment.Exit(0);
