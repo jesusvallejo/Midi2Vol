@@ -19,6 +19,7 @@ namespace Midi2Vol
     public class MidiSlider
     {
         private MidiIn midiIn;
+        private float volume;
         private int nanoID = -1;
         private int contVal = -1; // controller value to change different programs volume
         private int oldContVal = -1;
@@ -43,7 +44,7 @@ namespace Midi2Vol
         {
             try
             {
-                float volume;
+                
                 using (var enumerator = new CSCore.CoreAudioAPI.MMDeviceEnumerator())
                 {
                     while (true)
@@ -65,6 +66,8 @@ namespace Midi2Vol
                         {
                             oldPotVal = potVal;
                             volume = (float)(Math.Floor((potVal / 3 * 2.395)) / 100);
+                            nanoSliderTray.DynamicIcon(volume);
+                            
                             if (contVal == defaultOutputSink )
                             {
                                 ChangeOutputVolume(volume, enumerator);
@@ -109,7 +112,9 @@ namespace Midi2Vol
             }
         }
 
-
+        public float getVolume() {
+            return volume;
+        }
         void ChangeInputVolume(float volume, MMDeviceEnumerator enumerator)
         {
             using (var device = enumerator.GetDefaultAudioEndpoint(CSCore.CoreAudioAPI.DataFlow.Capture, CSCore.CoreAudioAPI.Role.Multimedia))

@@ -218,6 +218,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NanoSlider.ico" />
+    <None Include="Resources\100white.ico" />
+    <None Include="Resources\90white.ico" />
+    <None Include="Resources\80white.ico" />
+    <None Include="Resources\70white.ico" />
+    <None Include="Resources\60white.ico" />
+    <None Include="Resources\50white.ico" />
+    <None Include="Resources\40white.ico" />
+    <None Include="Resources\30white.ico" />
+    <None Include="Resources\20white.ico" />
+    <None Include="Resources\10white.ico" />
+    <None Include="Resources\0white.ico" />
     <None Include="Resources\whiteDis.ico" />
     <None Include="Resources\white.ico" />
     <None Include="Resources\NanoWavezDis.ico" />

@@ -151,4 +151,37 @@
   <data name="NanoWhiteDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\whiteDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="_0white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\0white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_100white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\100white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_10white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\10white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_20white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\20white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_30white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\30white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_40white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\40white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_50white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\50white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_60white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\60white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_70white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\70white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_80white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\80white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_90white" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\90white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
