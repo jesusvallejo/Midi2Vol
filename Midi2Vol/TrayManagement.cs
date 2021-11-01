@@ -20,13 +20,14 @@ namespace Midi2Vol
         private MenuItem iconBento;
         private MenuItem iconWavez;
         private MenuItem iconMizu;
+        private MenuItem iconWhite;
         private MenuItem exit;
 
         public TrayApplicationContext(Sett settings)
         {
             this.settings = settings;
             ContextMenu _trayMenu = new ContextMenu { };
-            _trayIcon.Icon = Properties.Resources.NanoSlider;
+            _trayIcon.Icon = GetIcon(settings.trayBarIcon)[0];
             _trayIcon.Text = "Midi2Vol";
             appConfig = _trayMenu.MenuItems.Add("App Config", configClick);
             noti = _trayMenu.MenuItems.Add("Notify", notif);
@@ -53,6 +54,7 @@ namespace Midi2Vol
             iconBento = icon.MenuItems.Add("NanoBento",clickBento);
             iconWavez = icon.MenuItems.Add("NanoWavez",clickWavez);
             iconMizu = icon.MenuItems.Add("NanoMizu",clickMizu);
+            iconWhite = icon.MenuItems.Add("NanoWhite", clickWhite);
 
             switch (settings.trayBarIcon)
             {
@@ -68,6 +70,9 @@ namespace Midi2Vol
                 case "NanoMizu":
                     iconMizu.Checked = true;
                     break;
+                case "NanoWhite":
+                    iconWhite.Checked = true;
+                    break;
                 default:
                     iconSlider.Checked = true;
                     break;
@@ -77,9 +82,20 @@ namespace Midi2Vol
             _trayIcon.Visible = true;
         }
 
+        private void clickWhite(object sender, EventArgs e)
+        {
+            iconWavez.Checked = false;
+            iconBento.Checked = false;
+            iconSlider.Checked = false;
+            iconMizu.Checked = false;
+            iconWhite.Checked = true;
+            settings.trayBarIcon = "NanoWhite";
+            Ready();
+        }
+
         private void clickMizu(object sender, EventArgs e)
         {
-
+            iconWhite.Checked = false;
             iconWavez.Checked = false;
             iconBento.Checked = false;
             iconSlider.Checked = false;
@@ -92,7 +108,7 @@ namespace Midi2Vol
         private void clickWavez(object sender, EventArgs e)
         {
 
-            
+            iconWhite.Checked = false;
             iconBento.Checked = false;
             iconSlider.Checked = false;
             iconMizu.Checked = false;
@@ -103,7 +119,7 @@ namespace Midi2Vol
 
         private void clickBento(object sender, EventArgs e)
         {
-
+            iconWhite.Checked = false;
             iconWavez.Checked = false;
             iconSlider.Checked = false;
             iconMizu.Checked = false;
@@ -114,7 +130,7 @@ namespace Midi2Vol
 
         private void clickSlider(object sender, EventArgs e)
         {
-
+            iconWhite.Checked = false;
             iconWavez.Checked = false;
             iconBento.Checked = false;
             iconSlider.Checked = true;
@@ -172,6 +188,10 @@ namespace Midi2Vol
                 case "NanoMizu":
                     icon[0] = Properties.Resources.NanoMizu;
                     icon[1] = Properties.Resources.NanoMizuDis;
+                    break;
+                case "NanoWhite":
+                    icon[0] = Properties.Resources.NanoWhite;
+                    icon[1] = Properties.Resources.NanoWhiteDis;
                     break;
                 default:
                     icon[0] = Properties.Resources.NanoSlider;
@@ -278,6 +298,7 @@ namespace Midi2Vol
         {
             Config config = new Config();
             config.saveAppConfig(apps);
+            _trayIcon.Visible = false;
             Application.Restart();
             Environment.Exit(0);
         }

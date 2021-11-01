@@ -145,4 +145,10 @@
   <data name="NanoWavezDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NanoWavezDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="NanoWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\white.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NanoWhiteDis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\whiteDis.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
