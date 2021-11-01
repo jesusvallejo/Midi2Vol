@@ -162,10 +162,10 @@ namespace Midi2Vol
                         {
                             process = Process.GetProcessById(session2.ProcessID);
                             Debug.WriteLine(process);
-                            //if (process.ProcessName == target && target != null)
-                           // {
-                            //    return session.QueryInterface<SimpleAudioVolume>();
-                            //}
+                            if (process.ProcessName == target && target != null)
+                            {
+                               return session.QueryInterface<SimpleAudioVolume>();
+                            }
                         }
                     }
                     Console.WriteLine("app not found: "+ target);
