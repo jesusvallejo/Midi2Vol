@@ -47,6 +47,9 @@ namespace Midi2Vol
                 
                 using (var enumerator = new CSCore.CoreAudioAPI.MMDeviceEnumerator())
                 {
+                    // update volume for first start dynamic icon
+                    //volume = (float)(Math.Floor((potVal / 3 * 2.395)) / 100);
+
                     while (true)
                     {
 

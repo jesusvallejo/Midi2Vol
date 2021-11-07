@@ -37,20 +37,43 @@ namespace Midi2Vol
             Sett settings = config.SourceSettings();
             List<App> apps = config.SourceAppConfig();
 
-            if (apps != null)
+
+            if (apps == null) { // error in json
+                const string message = "Configuration Volume file error.";
+                const string caption = "Midi2Vol";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                config.removeAppConfig();
+                Application.Restart(); // restart to load new app configs
+                Environment.Exit(0);
+            }
+            else if (settings == null) { //error in json
+                const string message = "Configuration Setting file error.";
+                const string caption = "Midi2Vol";
+                MessageBox.Show(message, caption, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                config.removeSett();
+                Application.Restart(); // restart to load new sett configs
+                Environment.Exit(0);
+            }
+
+            else
             {
                 TrayApplicationContext nanoSliderTray = new TrayApplicationContext(settings);
-                MidiSlider nanoSlider = new MidiSlider(settings,apps,nanoSliderTray);
+                MidiSlider nanoSlider = new MidiSlider(settings, apps, nanoSliderTray);
 
                 if (RunningInstance() == null)
                 {
+                    Debug.WriteLine("lets run");
                     Task.Run(() => nanoSlider.Slider());
                     Application.Run(nanoSliderTray);//run everything before this line or wont be runned
                 }
-                else {
+                else
+                {
                     nanoSliderTray.ProgramAlreadyRuning();
                 }
             }
+            
+
+
         }
     }
 }

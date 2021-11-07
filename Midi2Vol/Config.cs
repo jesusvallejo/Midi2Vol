@@ -14,7 +14,8 @@ class Config
         
         private String appConfigDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Midi2Vol";
         private String appConfigFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Midi2Vol\\appConfig.json";
-        private String defaultAppConfig = @"[
+        private String defaultAppConfig = @"
+    [
     {
       'name': 'Default',
       'AppRaw': '0x3E',
@@ -44,11 +45,24 @@ class Config
 
         private String configDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Midi2Vol";
         private String configFile = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Midi2Vol\\config.json";
-        private String defaultConfig = "{\"Startup\": \"false\",\"NotifyStatus\": \"false\",\"NotifyApp\": \"false\"}";
+        private String defaultConfig = @"
+        {
+        'bootStartup': 'false',
+        'NotifyStatus': 'false',
+        'NotifyApp': 'false',
+        'trayBarIcon': 'Default'
+        }";
 
 
         public Config() { 
         
+        }
+
+        public void removeSett() {
+            File.Delete(configFile);
+        }
+        public void removeAppConfig() {
+            File.Delete(appConfigFile);
         }
         public Sett SourceSettings() {
             if (!Directory.Exists(configDir))
@@ -84,6 +98,10 @@ class Config
                     String jsonString = System.IO.File.ReadAllText(configFile);
                     //probably should validate its a json, and that it has the correct structure
                     Sett settings = JsonConvert.DeserializeObject<Sett>(jsonString);
+                    if (settings == null)
+                    {
+                        return null;
+                    }
                     return settings;
                 }
                 catch
@@ -113,7 +131,7 @@ class Config
             }
         }
 
-
+       
 
 
 
@@ -150,6 +168,10 @@ class Config
                     String jsonString = System.IO.File.ReadAllText(appConfigFile);
                     //probably should validate its a json, and that it has the correct structure
                     List<App> apps = JsonConvert.DeserializeObject<List<App>>(jsonString);
+                    if (apps == null) {
+                        
+                        return null;
+                    }
                     return apps;
                 }
                 catch {

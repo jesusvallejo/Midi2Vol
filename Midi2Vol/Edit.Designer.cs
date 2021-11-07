@@ -150,8 +150,10 @@ namespace Midi2Vol
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Edit";
-            this.Text = "Edit";
+            this.Text = "Volume Settings";
             this.Load += new System.EventHandler(this.Edit_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -13,6 +13,7 @@ namespace Midi2Vol
         public Sett settings;
         
         private MenuItem appConfig;
+        private MenuItem settingsmenu;
         private MenuItem noti;
         private MenuItem notifyStatus;
         private MenuItem runStartup;
@@ -29,31 +30,36 @@ namespace Midi2Vol
         public TrayApplicationContext(Sett settings)
         {
             this.settings = settings;
-           ;
+            ;
             ContextMenu _trayMenu = new ContextMenu { };
             _trayIcon.Icon = GetIcon(settings.trayBarIcon)[0];
-            _trayIcon.Text = "Midi2Vol";
-            appConfig = _trayMenu.MenuItems.Add("App Config", configClick);
-            noti = _trayMenu.MenuItems.Add("Notify", notif);
+            _trayIcon.Text = Application.ProductName + " - Ver: "+ Application.ProductVersion;
+            // Main menu
+            appConfig = _trayMenu.MenuItems.Add("Volume Settings", configClick);
+            settingsmenu = _trayMenu.MenuItems.Add("Midi2Vol Settings");
+            icon = _trayMenu.MenuItems.Add("Icon Settings");
+            _trayMenu.MenuItems.Add("-");
+            exit = _trayMenu.MenuItems.Add("Exit", ExitClick);
+
+            // Settings submenu
+            noti = settingsmenu.MenuItems.Add("Notify", notif);
             if (settings.notifyApp) {
                 noti.Checked = true;
             }
-            runStartup =_trayMenu.MenuItems.Add("Run on StartUp", startupClick);
+
+            runStartup = settingsmenu.MenuItems.Add("Run on StartUp", startupClick);
             if (settings.bootStartUp)
             {
                 runStartup.Checked = true;
             }
-            notifyStatus = _trayMenu.MenuItems.Add("Notify Status", notifS);
+
+            notifyStatus = settingsmenu.MenuItems.Add("Notify Status", notifS);
             if (settings.notifyStatus)
             {
                 notifyStatus.Checked = true;
             }
 
-            icon = _trayMenu.MenuItems.Add("Icon");
-            exit = _trayMenu.MenuItems.Add("Exit", ExitClick);
-
-
-            // icon submenu 
+            // Icon submenu 
             iconSlider = icon.MenuItems.Add("Default",clickSlider);
             iconBento = icon.MenuItems.Add("NanoBento",clickBento);
             iconWavez = icon.MenuItems.Add("NanoWavez",clickWavez);
@@ -327,8 +333,9 @@ namespace Midi2Vol
         }
         private void ExitProgram()
         {
-            Config configs = new Config();
-            configs.saveConfig(settings);
+            Config config = new Config();
+            config.saveConfig(settings);
+            //config.saveAppConfig(apps);
             Application.Exit();           // closed everything
             Environment.Exit(1);         // Kaboom!
         }
@@ -386,7 +393,7 @@ namespace Midi2Vol
             config.saveAppConfig(apps);
             config.saveConfig(settings);
             _trayIcon.Visible = false;
-            Application.Restart();
+            Application.Restart(); // restart to load new app configs
             Environment.Exit(0);
         }
 
